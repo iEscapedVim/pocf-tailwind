@@ -1,0 +1,15 @@
+---
+import { getCollection } from 'astro:content';
+const members = await getCollection("members");
+
+import MembersCard from '@comps/members/membersCard.astro';
+---
+<section class="w-full bg-gray-100 py-16 flex flex-col justify-center items-center">
+    <div class="w-1/2 mx-auto flex flex-col justify-center items-center">
+        <h2 class="text-[40px] font-normal lora">Latest <b>Members</b></h2>
+        <p class="capitalize text-secondary lato font-bold">Our charity helps those people who have no hope</p>
+    </div>
+    <div class="w-11/12 mx-auto grid grid-cols-12 gap-12 mt-24">
+        {members.sort((a, b) => new Date(b.data.joined).getTime() - new Date(a.data.joined).getTime()).slice(0, 4).map((m: any) => <MembersCard member={m}/>)}
+    </div>
+</section>

@@ -1,5 +1,25 @@
 {
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"]
+  "exclude": ["dist"],
+  "compilerOptions": {
+    "strictNullChecks": true,
+    "allowJs": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [ "src/*" ],
+      "@assets/*": [ "src/assets/*" ],
+      "@icons/*": [ "src/assets/icons/*" ],
+      "@imgs/*": [ "src/assets/imgs/*" ],
+      "@js/*": [ "public/js/*" ],
+      "@css/*": [ "src/assets/css/*" ],
+      "@comps/*": [ "src/components/*" ],
+      "@layouts/*": [ "src/layouts/*" ],
+      "@pages/*": [ "src/pages/*" ],
+      "@nodes/*": [ "node_modules/*"],
+      "@bootstrap/*": [ "node_modules/bootstrap/dist/*"],
+      "@animate/*": [ "node_modules/animate.css/*"],
+      "@fa/*": [ "node_modules/font-awesome/*"],
+    },
+  }
 }

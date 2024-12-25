@@ -1,0 +1,79 @@
+---
+import TestimonialBG from '@imgs/testi-bg.jpg';
+import TestimonialCard from '@comps/testimonialCard.astro';
+
+import Feed from '@imgs/feed-img.png';
+import { Image } from 'astro:assets';
+
+import { getCollection } from 'astro:content';
+const allTestimonials = await getCollection("testimonials");
+---
+<section class="bg-before overflow-hidden w-full flex flex-col justify-center items-center relative" style={{ backgroundImage: `url(${TestimonialBG.src})` }}>
+    <div class="w-11/12 mx-auto grid grid-cols-9 gap-0 justify-center items-center">
+        <div class="col-span-9 lg:col-span-5 flex flex-col py-20 mt-12">
+            <h2 class="lora font-normal text-3xl"><b>WHAT</b> Our Members Say</h2>
+            <div class="testi-slides"> 
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        {allTestimonials.map((t: any) => <TestimonialCard testimonial={t} />)}
+                    </div>
+                    <div class="swiper-pagination [&>.swiper-pagination-bullet-active-next]:bg-secondary [&>.swiper-pagination-bullet-active-main]:bg-primary"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-9 lg:col-span-4 with-bg-drk relative">
+            <Image class="img-responsive" src={Feed} alt="" />
+        </div>
+    </div>
+</section>
+
+<script>
+    import Swiper from 'swiper';
+    import 'swiper/css/bundle';
+    import {Autoplay, Pagination } from 'swiper/modules';
+    Swiper.use([Autoplay, Pagination]);
+
+    // init Swiper:
+    var swiper = new Swiper(".swiper", {
+        loop: true,
+        autoplay: {
+            delay: 2000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            dynamicBullets: true,
+        },
+    });
+</script>
+
+<style>
+    .testi-slides:before {
+        background: url(/src/assets/imgs/quotes.png) top left no-repeat;
+    }
+    .bg-before:before {
+        height: 40px;
+        background: #fff;
+        content: "";
+        position: absolute;
+        width: 100%;
+        top: 0;
+    }
+    .with-bg-drk:before {
+        background: #434343;
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 93%;
+        bottom: 0;
+        left: 30%;
+        z-index: 1;
+    }
+.with-bg-drk {
+	padding-left: 0px;
+}
+.with-bg-drk img {
+	position: relative;
+	z-index: 2;
+}
+</style>

@@ -1,0 +1,20 @@
+---
+import { Image } from "astro:assets";
+const { slide } = Astro.props;
+const { title, image, imagealt, description, buttontext, buttonurl } = slide.data;
+const htmlString = title;
+---
+<div class="duration-700 ease-in-out absolute inset-0 transition-all transform translate-x-0 z-20" data-carousel-item="">
+    <Image src={image} alt={imagealt} class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" /> 
+    <span class="absolute top-1/2 left-1/2 text-2xl font-semibold text-white -translate-x-1/2 -translate-y-1/2 sm:text-3xl">
+        <h1 set:html={htmlString} class="w-full md:w-4/5 md:leading-[70px] font-montserrat uppercase font-normal text-sm md:text-[45px] [&>span]:font-bold [&>span]:text-secondary"/>
+        <hr class="border-2 h-0 border-primary w-44 my-2" />
+        <p class="lora font-bold text-[11px] md:text-xl py-4 leading-3">{description}</p>
+        {buttontext && (
+            <a href={buttonurl} class="bg-primary text-secondary py-3 px-4 text-[8px] md:text-[16px] lora font-bold w-4/5 gap-2 mt-3 hover:bg-secondary hover:text-white hover:cursor-pointer">
+                {buttontext}
+                <i class="fa fa-caret-right"></i>
+            </a>
+        )}
+    </span>
+</div>

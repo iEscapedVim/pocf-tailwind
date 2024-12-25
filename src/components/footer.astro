@@ -1,0 +1,77 @@
+---
+import {Icon} from "astro-icon/components";
+---
+<footer class="w-full bg-[#232323] text-gray-400 flex flex-col">
+    <div class="w-11/12 mx-auto flex flex-row gap-4 p-0 m-0 py-10">
+        <a href="#." class="group bg-secondary group m-0 p-3 hover:bg-primary">
+            <Icon name="social/facebook" class="text-white group-hover:text-secondary flex justify-center items-center w-6 h-auto"/>
+        </a>
+        <a href="#." class="group bg-secondary group m-0 p-3 hover:bg-primary">
+          <Icon name="social/twitter" class="text-white group-hover:text-secondary flex justify-center items-center w-6 h-auto"/>
+        </a>
+        <a href="#." class="group bg-secondary group m-0 p-3 hover:bg-primary">
+          <Icon name="social/istg" class="text-white group-hover:text-secondary flex justify-center items-center w-6 h-auto"/>
+        </a>
+        <a href="#." class="group bg-secondary group m-0 p-3 hover:bg-primary">
+          <Icon name="social/linkedin" class="text-white group-hover:text-secondary flex justify-center items-center w-6 h-auto"/>
+        </a>
+    </div>
+    <div class="w-11/12 mx-auto grid grid-cols-9 gap-6 lato mb-6">
+      <div class="flex flex-col col-span-5 gap-0 m-0">
+          <!-- Contact Info -->
+          <h4 class="text-white font-bold lora italic capitalize">keep in touch</h4>
+          <hr class="h-0.5 border-0 bg-primary mb-8 mt-0 w-1/4" />
+          <div class="flex flex-col gap-2 lato">
+            <p>Address: 44 New Design Street, Melbourne 005 </p>
+            <p>Phone: (01) 800 433 633</p>
+            <p>Email: info@Example.com</p>
+          </div>
+          <div class="mt-6">
+
+            <form class="w-full mx-auto">
+                <div class="flex">
+                    <div class="relative w-1/2">
+                        <input type="email" class="block w-full z-20 text-sm text-gray-900 bg-gray-50 ring-0 outline-0 border-0 focus:outline-0 focus:ring-0 focus:border-0" placeholder="Your Email Address" required />
+                        <button type="submit" class="w-1/4 h-full absolute top-0 end-0 p-2.5 text-secondary bg-primary flex justify-center items-center hover:bg-secondary hover:text-primary">
+                            <Icon name="emailalt" class="w-5 h-auto" />
+                            <span class="sr-only">Search</span>
+                        </button>
+                    </div>
+                </div>
+            </form>            
+          </div>
+      </div>
+      <div class="flex flex-col col-span-2 gap-0 m-0">
+        <!-- Contact Info -->
+        <h4 class="text-white font-bold lora italic capitalize">Useful Links</h4>
+        <hr class="h-0.5 border-0 bg-primary mb-8 mt-0 w-1/4" />
+        <div class="flex flex-col gap-2">
+          <a href="#." class="hover:text-white">About Us</a>
+          <a href="#." class="hover:text-white">Meet The Team</a>
+          <a href="#." class="hover:text-white">Volunteers</a>
+          <a href="#." class="hover:text-white">Service Provided</a>
+          <a href="#." class="hover:text-white">Latest News</a>
+          <a href="#." class="hover:text-white">Contact Us</a>
+        </div>
+      </div>
+      <div class="flex flex-col col-span-2 gap-0 m-0">
+        <!-- Membership -->
+        <h4 class="text-white font-bold lora italic capitalize">Members</h4>
+        <hr class="h-0.5 border-0 bg-primary mb-8 mt-0 w-1/4" />
+        <div class="flex flex-col gap-2">
+          <a href="#." class="hover:text-white">How To Join?</a>
+          <a href="#." class="hover:text-white">How To Donate?</a>
+          <a href="#." class="hover:text-white">Member's List</a>
+          <a href="#." class="hover:text-white">FAQs</a>
+          <a href="#make-member" class="mt-3 py-2 lora italic text-[11px] md:text-sm font-bold flex flex-row justify-center items-center gap-2 group bg-secondary text-white hover:bg-primary hover:text-secondary border border-solid border-primary">
+            <Icon name="heart" class="text-primary group-hover:text-secondary w-5 h-auto" />
+            Become a Member
+          </a>
+        </div>
+      </div>      
+    </div>
+    <div class="w-full flex lora italic justify-center items-center bg-[#1c1c1c]">
+        <p class="capitalize m-0 py-6">Copyright © 2024 POCF. All Rights Reserved.</p>
+    </div>
+</footer>
+

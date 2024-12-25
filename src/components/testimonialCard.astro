@@ -1,0 +1,23 @@
+---
+const { testimonial } = Astro.props;
+const { ref, message } = testimonial.data;
+
+import { Icon } from "astro-icon/components";
+import { getEntry } from "astro:content";
+// fetch client details
+const member = await getEntry("members", ref);
+let name, role;
+if (member) {
+  ({ name, role } = member.data);
+}
+---
+<blockquote class="py-8 hover:cursor-grab swiper-slide text-xl lora italic font-semibold text-secondary flex flex-col">
+  <div class="flex flex-row justify-start items-center gap-6">
+    <Icon name="quotes" class="w-12 h-auto text-primary transform rotate-180" />
+    <p>"{message}"</p>
+  </div>
+  <div class="flex flex-col text-start items-end font-normal gap-0 text-gray-600">
+    <p>{name}</p>
+    <p class="text-gray-500">{role}</p>
+  </div>
+</blockquote>
