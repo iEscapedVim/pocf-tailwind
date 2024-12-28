@@ -1,0 +1,18 @@
+---
+import { Image } from "astro:assets";
+
+const { media } = Astro.props;
+const { title, image, imagealt, filter, description } = media.data;
+---
+<li class={"col-sm-4 item list-none group " + filter}>
+    <section class="relative mb-12"> 
+        <Image class="w-full img-responsive" src={image} alt={imagealt} />
+        <div class="absolute top-0 bottom-0 left-0 right-0 z-50 bg-secondary/60 hidden group-hover:flex"> 
+            <a href={image.src} class="w-full h-full flex flex-col justify-center items-center gap-5">
+                <h5 class="text-white p-0 m-0 font-bold text-[18px]">{title}</h5>
+                <hr class="text-white p-0 m-0 font-bold border-0 h-0.5">
+                <p  class="text-white p-0 m-0 font-bold text-[14px]">{description}</p>
+            </a> 
+        </div>
+    </section>
+</li>

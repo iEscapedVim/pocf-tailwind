@@ -54,9 +54,15 @@ import { Icon } from "astro-icon/components";
     import counterUp from 'counterup2'
     const counters = document.querySelectorAll( '.counter' )
     counters.forEach( counter => {
-        counterUp( counter, {
-            duration: 1000,
-            delay: 16,
-        } )
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                counterUp( counter, {
+                    duration: 1000,
+                    delay: 16,
+                } )
+                observer.unobserve(counter);
+            }
+        }, { rootMargin: '0px 0px -200px 0px' });
+        observer.observe(counter);
     })
 </script>

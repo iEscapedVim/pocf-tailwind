@@ -1,0 +1,48 @@
+---
+const { filter } = Astro.props;
+const { title } = filter.data;
+---
+<a href="#" class="bt-lora italic" data-filter={"." + title} style="text-transform: capitalize;">
+    {title}
+</a>
+<script>
+    $(".select")
+        .on("click", ".placeholder", function (event) {
+            const parent = $(event.currentTarget).closest(".select");
+            if (parent && !parent.hasClass("is-open")) {
+                parent.addClass("is-open");
+                $(".select.is-open").not(parent).removeClass("is-open");
+            } else if (parent) {
+                parent.removeClass("is-open");
+            }
+        })
+        .on("click", "ul>li", function (event) {
+            const parent = $(event.currentTarget).closest(".select");
+            if (!parent) {
+                return;
+            }
+
+            parent
+                .removeClass("is-open")
+                .find(".placeholder")
+                .text($(event.currentTarget).text());
+            parent
+                .find("input[type=hidden]")
+                .attr(
+                    "value",
+                    $(event.currentTarget).attr("data-value") || ""
+                );
+
+            $(".filter__item").removeClass("active");
+            $(event.currentTarget).addClass("active");
+            const selector = $(event.currentTarget).attr("data-filter");
+            if (!selector) {
+                return;
+            }
+
+            ($(".js-filter-container") as any).isotope({
+                filter: selector,
+            });
+            return false;
+        });
+</script>

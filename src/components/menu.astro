@@ -1,0 +1,26 @@
+---
+
+---
+
+<script>
+    const currentLocation = window.location.href;
+    const menuItems = document.querySelectorAll('ul.menu>li');
+    menuItems.forEach(item => {
+        const link = item.querySelector('a');
+        if (link && link.href === currentLocation) {
+            // add class to li
+            item.classList.remove('hover:-mt-[1px]');
+            item.classList.remove('hover:border-t');
+            item.classList.add('border-t-2');
+        }
+    })
+</script>
+
+<ul class="menu flex flex-row gap-5 lora uppercase font-semibold text-sm">
+    <li class="hover:border-t border-secondary py-6 hover:-mt-[1px]"><a href="/">Home</a></li>
+    <li class="hover:border-t border-secondary py-6 hover:-mt-[1px]"><a href="/media">Media</a></li>
+    <li class="hover:border-t border-secondary py-6 hover:-mt-[1px]"><a href="/members">Members</a></li>
+    <li class="hover:border-t border-secondary py-6 hover:-mt-[1px]"><a href="/stories">Stories</a></li>
+    <li class="hover:border-t border-secondary py-6 hover:-mt-[1px]"><a href="/about">About Us</a></li>
+    <li class="hover:border-t border-secondary py-6 hover:-mt-[1px]"><a href="/contact">Contact Us</a></li>
+</ul>

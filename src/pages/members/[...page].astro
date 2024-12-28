@@ -1,0 +1,58 @@
+---
+import Layout from '@layouts/SinglePages.astro';
+import MembersCard from '@comps/members/membersCard.astro';
+import Pagination from "@comps/pagination.astro";
+
+import { getCollection } from 'astro:content';
+const randomQuote = await getCollection("quotes");
+
+export async function getStaticPaths({ paginate }: { paginate: (posts: any[], options: { pageSize: number }) => any }) {
+    const allMembers = await getCollection("members");
+    return paginate(allMembers, { pageSize: 5 });
+}
+
+const { page }: any = Astro.props;
+---
+<Layout title="Our Members">
+<div class="w-full bg-gray-100 py-24">
+    <div class="w-11/12 mx-auto grid grid-cols-12 gap-12">
+        {page.data.sort((a: { data: { joined: string | number | Date; }; }, b: { data: { joined: string | number | Date; }; }) => new Date(b.data.joined).getTime() - new Date(a.data.joined).getTime()).map((m: any) => <MembersCard member={m}/>)}
+    </div>
+    <div class="w-11/12 mx-auto flex justify-between items-center my-12 py-8 border-0 border-t border-solid border-gray-300">
+        <Pagination prevUrl={page.url.prev} />
+            <div style="display: flex; gap: 10px">
+                {page.url.first ? <a href={page.url.first} class="page">First</a> : null}
+                <a href={page.currentPage} class="page active">
+                    {page.currentPage}
+                </a>
+                {page.url.last ? <a href={page.url.last} class="page">Last</a> : null}
+            </div>
+        <Pagination nextUrl={page.url.next} />
+    </div>
+</div>
+
+<style>
+    .page {
+        color: #232323;
+        text-decoration: underline !important;
+        padding: 10px 15px;
+        font-weight: bold;
+        height: 30px;
+        font-family: 'Lora', serif;
+        -webkit-transition: all 0.4s ease-in-out;
+        -moz-transition: all 0.4s ease-in-out;
+        -o-transition: all 0.4s ease-in-out;
+        -ms-transition: all 0.4s ease-in-out;
+        transition: all 0.4s ease-in-out;
+        display: flex;
+        align-items: center;
+    }
+    .page:hover {
+        text-decoration: none !important;
+    }
+    .active {
+        background: #ecc731;
+        text-decoration: none !important;
+    }
+</style>
+</Layout>

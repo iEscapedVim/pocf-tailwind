@@ -21,7 +21,7 @@ const formattedDate = `${day} ${month}`;
             <time datetime={pubDate} class="text-md p-0 font-normal py-2 mt-5 text-gray-500">{formattedDate}, {year}</time>
         </p>
         <a class="lora" href={`/stories/${post.slug}`}>
-            <h2 class="text-[25px] text-capitalize font-bold m-0">{title}</h2>
+            <h2 class="text-[25px] text-capitalize font-bold m-0 lora italic capitalize">{title}</h2>
         </a> 
         <p class="pt-2 lato text-gray-500">
             { description.slice(0, 65) + "..." }

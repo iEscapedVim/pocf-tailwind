@@ -3,6 +3,7 @@ import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 
 import Logo from '@imgs/logo.png';
+import Menu from '@comps/menu.astro';
 ---
 <header class="w-full flex flex-col">
     <!-- Top Bar -->
@@ -23,7 +24,7 @@ import Logo from '@imgs/logo.png';
     <!-- Logo & Membership Button -->
     <div class="bg-white text-secondary w-11/12 grid grid-cols-1 md:grid-cols-2 mx-auto gap-6 py-3">
         <div class="flex justify-center lg:justify-start items-center">
-            <a href="/"><Image src={Logo} alt="POCF Logo" /></a>
+            <Image src={Logo} alt="POCF Logo" />
         </div>
         <div class="flex justify-center lg:justify-end items-center">
             <a href="#make-member" class="py-2 px-3 lora italic text-[11px] md:text-sm font-bold flex flex-row justify-center items-center gap-2 group bg-secondary text-white hover:bg-primary hover:text-secondary">
@@ -42,23 +43,7 @@ import Logo from '@imgs/logo.png';
             </svg>
         </button>
         <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-          <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 [&>li>a]:block [&>li>a]:lato [&>li>a]:font-bold [&>li>a]:border-0 [&>li>a]-mt-0.5">
-            <li id="homeNavLink">
-              <a href="#" class="z-50 lato font-bold border-0 hover:border-t border-secondary" aria-current="page" id="homeLink">Home</a>
-            </li>
-            <li id="aboutNavLink">
-              <a href="#" class="z-50 lato font-bold border-0 hover:border-t border-secondary" id="aboutLink">About</a>
-            </li>
-            <li id="servicesNavLink">
-              <a href="#" class="z-50 lato font-bold border-0 hover:border-t border-secondary" id="servicesLink">Services</a>
-            </li>
-            <li id="pricingNavLink">
-              <a href="#" class="z-50 lato font-bold border-0 hover:border-t border-secondary" id="pricingLink">Pricing</a>
-            </li>
-            <li id="contactNavLink">
-              <a href="#" class="z-50 lato font-bold border-0 hover:border-t border-secondary" id="contactLink">Contact</a>
-            </li>
-          </ul>
+            <Menu />
         </div>
       </div>
   </nav>

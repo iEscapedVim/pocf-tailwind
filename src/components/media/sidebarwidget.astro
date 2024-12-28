@@ -1,0 +1,13 @@
+---
+import { Image } from "astro:assets";
+
+const { media } = Astro.props;
+const { image, imagealt } = media.data;
+---
+<li class="col-span-4 item list-none group">
+    <div class="relative mb-12"> 
+        <a href={image.src}>
+            <Image class="w-full img-responsive hover:opacity-80" src={image} alt={imagealt} />
+        </a> 
+    </div>
+</li>

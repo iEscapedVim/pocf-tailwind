@@ -1,0 +1,100 @@
+---
+// Importing All The Fonts
+import '@fontsource-variable/lora';
+import '@fontsource-variable/lora/wght-italic.css';
+import '@fontsource-variable/montserrat/wght-italic.css';
+
+import '@fontsource/lato/100.css';
+import '@fontsource/lato/300.css';
+import '@fontsource/lato/400.css';
+import '@fontsource/lato/700.css';
+import '@fontsource/lato/900.css';
+import '@fontsource/lato/100-italic.css';
+import '@fontsource/lato/300-italic.css';
+import '@fontsource/lato/400-italic.css';
+import '@fontsource/lato/700-italic.css';
+import '@fontsource/lato/900-italic.css';
+
+import Head from '@comps/head.astro';
+import Header from '@comps/header.astro';
+import Footer from '@comps/footer.astro';
+
+const { frontmatter } = Astro.props;
+import CallOutBG from "@imgs/call-out-bg.jpg";
+
+import Sidebar from '@comps/stories/sidebar.astro';
+import Quotescard from '@comps/stories/quotescard.astro';
+
+import { getCollection } from 'astro:content';
+const randomQuote = await getCollection("quotes");
+---
+
+
+<!doctype html>
+<html lang="en">
+	<Head>
+        <title>
+			{frontmatter.title}
+		</title>
+	</Head>
+	<body>
+		<Header />
+        <!-- Banner -->
+        <div class="w-full h-72 bg-cover bg-center bg-no-repeat bg-secondary bg-blend-overlay flex justify-center items-center" style={{ backgroundImage: `url(${CallOutBG.src})` }}>
+            <div class="w-11/12 mx-auto font-bold flex flex-col gap-4 lora italic text-white text-3xl text-center">
+                <h3 class="capitalize">{frontmatter.title}</h3>
+                <!-- Breadcrumbs -->
+                <ol class="flex flex-row gap-2 text-sm font-normal capitalize lora italic w-full justify-center items-center">
+                    <li><a href="/" style="color: #ffdd00;">Home</a></li>
+                    <li>/</li>
+                    <li><a href="/stories" style="color: #ffdd00;">Stories</a></li>
+                    <li>/</li>
+                    <li>{frontmatter.title}</li>
+                </ol>
+            </div>                    
+        </div>
+		<!-- Article Content -->
+        <section class="w-11/12 mx-auto grid grid-cols-12 justify-center items-start">
+            <div class="col-span-12 md:col-span-9">
+                <!-- Article Data -->
+                <div class="w-11/12 prose-lg prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl prose-h4:text-2xl prose-h5:text-xl prose-h6:text-lg prose-p:text-md prose-p:text-secondary prose-li:text-gray-600 prose-strong:text-gray-800">
+                    <slot />
+                </div>
+                <br />
+                <div class="w-11/12">
+                    <!-- Random Quote -->
+                    {randomQuote.sort(() => 0.5 - Math.random()).slice(0, 1).map((p: any) => <Quotescard post={p}/>)}
+                </div>
+            </div>
+            <div class="hidden md:flex col-span-3">
+                <Sidebar />
+            </div>
+        </section>
+		<Footer />
+	</body>
+</html>
+
+<style is:global>
+	@tailwind base;
+	@tailwind components;
+	@tailwind utilities;
+    h1, h2, h3, h4, h5, h6, a, strong {
+        font-family: 'Lora Variable', serif;
+        font-style: italic;
+    }
+    p {
+        font-family: 'Lato', sans-serif;
+        text-align: justify;
+    }
+    .montserrat {
+        font-family: 'Montserrat Variable', sans-serif;
+    }
+    ul {
+        list-style-type: disc !important;
+        margin-right: 3px;
+    }
+    li::marker {
+        font-size: 21px;
+        color: #eec731;
+    }
+</style>

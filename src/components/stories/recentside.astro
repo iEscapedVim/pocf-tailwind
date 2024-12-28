@@ -1,0 +1,25 @@
+---
+import { Image } from "astro:assets";
+
+const { post } = Astro.props;
+const { title, image, imagealt, pubDate } = post.data;
+
+const date = new Date(pubDate);
+const year = date.getFullYear();
+const month = date.toLocaleString('en-US', { month: 'short' });
+const day = date.getDate();
+const formattedDate = `${day} ${month}`;
+---
+<div class="py-3">
+    <a href={`/stories/${post.slug}/`} class="grid grid-cols-5 justify-center items-center gap-0">
+        <div class="col-span-3">
+            <h3 class="text-capitalize text-lg capitalize lora italic font-bold text-secondary">{title}</h3>
+            <p>
+                <time datetime={pubDate} class="text-md font-normal py-2 -mt-5 mb-5 text-gray-500">{formattedDate}, {year}</time>
+            </p>
+        </div>
+        <div class="col-span-2"> 
+            <Image class="w-full h-auto" src={image} alt={imagealt} > 
+        </div>
+    </a>
+</div>

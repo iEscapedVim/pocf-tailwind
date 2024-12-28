@@ -1,0 +1,88 @@
+---
+import Layout from '@layouts/SinglePages.astro';
+import { Icon } from 'astro-icon/components';
+---
+<Layout title="Contact Us">
+<section class="w-full bg-gray-100 pt-24">
+    <div class="grid grid-cols-9 w-11/12 mx-auto gap-12">
+        <div class="col-span-6 flex flex-col">
+            <h3 class="font-bold lora text-3xl italic text-secondary">Message Us</h3>
+            <form action="#" class="space-y-8 py-12 mb-12">
+                <div>
+                  <label class="text-gray-400 font-normal text-md" for="name">Full Name <span class="text-red-600 text-xl">*</span> </label>
+                  <input required class="w-full rounded-lg border-gray-200 border-solid border-b border-0 bg-transparent text-xl focus:ring-0 focus:border-b-2 focus:border-primary outline-0" type="text" name="name" />
+                </div>
+      
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <div>
+                    <label class="text-gray-400 font-normal text-md" for="email">Email <span class="text-red-600 text-xl">*</span></label>
+                    <input required class="w-full rounded-lg border-gray-200 border-solid border-b border-0 bg-transparent text-xl focus:ring-0 focus:border-b-2 focus:border-primary outline-0" type="email" name="email" />
+                  </div>
+      
+                  <div>
+                    <label class="text-gray-400 font-normal text-md" for="phone">Phone <span class="text-red-600 text-xl">*</span></label>
+                    <input required class="w-full rounded-lg border-gray-200 border-solid border-b border-0 bg-transparent text-xl focus:ring-0 focus:border-b-2 focus:border-primary outline-0" type="tel" name="phone" />
+                  </div>
+                </div>
+                <div>
+                    <label class="text-gray-400 font-normal text-md" for="subject">Subject <span class="text-red-600 text-xl">*</span></label>
+                    <input required class="w-full rounded-lg border-gray-200 border-solid border-b border-0 bg-transparent text-xl focus:ring-0 focus:border-b-2 focus:border-primary outline-0" type="text" name="subject" />
+                  </div>
+                <div>
+                  <label class="text-gray-400 font-normal text-md" for="message">Message <span class="text-red-600 text-xl">*</span></label>
+                  <textarea required class="w-full rounded-lg border-gray-200 border-solid border-b border-0 bg-transparent text-xl focus:ring-0 focus:border-b-2 focus:border-primary outline-0" rows="4" name="message" ></textarea>
+                </div>
+      
+                <div class="mt-4">
+                  <button type="submit" class="text-sm font-bold italic lora py-2 px-4 border-0 bg-primary text-secondary hover:text-white hover:bg-secondary">
+                    Send Enquiry
+                  </button>
+                </div>
+              </form>
+        </div>
+        <div class="col-span-3 flex flex-col">
+            <h3 class="font-bold lora text-2xl italic text-secondary">Contact Details</h3>
+            <div class="grid grid-cols-6 py-2 justify-center items-center">
+                <div class="col-span-2 flex justify-center items-start">
+                    <div class="bg-primary w-12 h-12 flex justify-center items-center">
+                        <Icon name="location" class="w-6 h-auto text-white" />
+                    </div>
+                </div>
+                <div class="col-span-4 flex flex-col justify-center items-start">
+                    <h3 class="m-0 font-bold py-2">Address</h3>
+                    <p class="text-gray-400 text-sm">44 new Design Street, Melbourne 005<br>
+                    Australia 300</p>
+                </div>
+                <hr class="border-0.5 mt-4 h-0 border-primary col-span-6" />
+            </div>
+
+            <div class="grid grid-cols-6 py-2 justify-center items-center">
+                <div class="col-span-2 flex justify-center items-start">
+                    <div class="bg-primary w-12 h-12 flex justify-center items-center">
+                        <Icon name="phone" class="w-6 h-auto text-white" />
+                    </div>
+                </div>
+                <div class="col-span-4 flex flex-col justify-center items-start">
+                    <h3 class="m-0 font-bold py-2">Phone</h3>
+                    <a href="#" class="text-gray-400 text-sm">01 (800) 433 744</a>
+                    <a href="#" class="text-gray-400 text-sm">01 (800) 433 744</a>
+                </div>
+                <hr class="border-0.5 mt-4 h-0 border-primary col-span-6" />
+            </div>
+
+            <div class="grid grid-cols-6 py-2 justify-center items-center">
+                <div class="col-span-2 flex justify-center items-start">
+                    <div class="bg-primary w-12 h-12 flex justify-center items-center">
+                        <Icon name="email" class="w-6 h-auto text-white" />
+                    </div>
+                </div>
+                <div class="col-span-4 flex flex-col justify-center items-start">
+                    <h3 class="m-0 font-bold py-2">Email</h3>
+                    <a href="#" class="text-gray-400 text-sm">support@domain.com</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+</Layout>

@@ -1,0 +1,35 @@
+---
+import Recentcard from "./recentside.astro";
+
+import { getCollection } from 'astro:content';
+const recentPosts = await getCollection("stories");
+
+
+import GalleryWidget from '@comps/media/sidebarwidget.astro';
+const recentMedia = await getCollection("media");
+---
+<div class="flex flex-col my-12">
+    <div class="flex flex-col pb-12">
+        <h3 class="text-2xl font-bold m-0 p-0 lora italic">Categories</h3>
+        <ul class="py-4">
+            <li class="list-none py-2 border-b border-primary border-solid border-0 lato italic capitalize"><a href="#."> All (52)</a></li>
+            <li class="list-none py-2 border-b border-primary border-solid border-0 lato italic capitalize"><a href="#."> Food  (11)</a></li>
+            <li class="list-none py-2 border-b border-primary border-solid border-0 lato italic capitalize"><a href="#."> Disease (10) </a></li>
+            <li class="list-none py-2 border-b border-primary border-solid border-0 lato italic capitalize"><a href="#."> Nature  (52)</a></li>
+            <li class="list-none py-2 border-b border-primary border-solid border-0 lato italic capitalize"><a href="#."> Education  (52)</a></li>
+        </ul>
+    </div>
+    <div class="flex flex-col pb-12">
+        <h3 class="text-2xl font-bold m-0 p-0 lora italic pb-8">Recent post</h3>
+        {recentPosts.sort((a: { data: { pubDate: string | number | Date; }; }, b: { data: { pubDate: string | number | Date; }; }) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()).slice(0, 3).map((p: any) => <Recentcard post={p}/>)}
+    </div>
+    <div class="flex flex-col pb-20">
+        <h3 class="text-2xl font-bold m-0 p-0 lora italic pb-8">Image Gallery</h3>
+        <div class="popup-gallery">
+            <ul class="items gallery-item grid grid-cols-12 gap-3">
+                {recentMedia.slice(0, 6).map((m: any) => <GalleryWidget media={m}/>)}
+            </ul>
+        </div>  
+    </div>
+
+</div>

@@ -1,0 +1,23 @@
+---
+import Clock from "@imgs/404-clock.png";
+import Layout from '@layouts/SinglePages.astro';
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+---
+<Layout title="404 Page Not Found">      
+  <div class="grid grid-col-2 md:grid-cols-4 py-12 justify-center items-center gap-8 w-11/12 mx-auto">
+    <Image class="max-w-full col-span-2" src={Clock} alt="" />
+    <div class="col-span-2 flex flex-col gap-3 lora">
+      <h2 class="text-secondary font-bold text-2xl italic">Sorry, This Page isn’t Available</h2>
+      <span class="text-gray-500 font-normal flex flex-col gap-0">
+        <p>Looks like you have followed a broken link or entered a URL that doesn’t exist on this site</p>
+        <p>Try Verifiing the link or reach out to us at <a href="mailto:info@Example.com" class="text-secondary underline">info@Example.com</a></p>
+        <p>Thank you!</p>
+        </span>
+      <a href="/" class="w-1/2 md:w-1/5 flex flex-row justify-between items-center gap-3 bg-primary text-secondary hover:bg-secondary hover:text-white lora uppercase text-[11px] font-bold mt-3">
+        <span class="w-full text-center">Go Home</span>
+        <Icon name="home" class="text-white bg-secondary flex justify-center items-center p-2 w-12 h-auto"/>
+      </a>
+    </div>
+  </div>
+</Layout>
