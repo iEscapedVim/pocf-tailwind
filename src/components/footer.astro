@@ -1,5 +1,6 @@
 ---
 import {Icon} from "astro-icon/components";
+import Membership from "@comps/members/membership.astro";
 ---
 <footer class="w-full bg-[#232323] text-gray-400 flex flex-col">
     <div class="w-11/12 mx-auto flex flex-row gap-4 p-0 m-0 py-10">
@@ -63,10 +64,10 @@ import {Icon} from "astro-icon/components";
           <a href="#." class="hover:text-white">How To Donate?</a>
           <a href="#." class="hover:text-white">Member's List</a>
           <a href="#." class="hover:text-white">FAQs</a>
-          <a href="#make-member" class="mt-3 py-2 lora italic text-[11px] md:text-sm font-bold flex flex-row justify-center items-center gap-2 group bg-secondary text-white hover:bg-primary hover:text-secondary border border-solid border-primary">
+          <button class="make-member-button border border-primary ring-0 focus:ring-0 outline-0 focus:outline-0 py-2 px-3 lora italic text-[11px] md:text-sm font-bold flex flex-row justify-center items-center gap-2 group bg-secondary text-white hover:bg-primary hover:text-secondary">
             <Icon name="heart" class="text-primary group-hover:text-secondary w-5 h-auto" />
             Become a Member
-          </a>
+          </button>
         </div>
       </div>      
     </div>
@@ -74,4 +75,5 @@ import {Icon} from "astro-icon/components";
         <p class="capitalize m-0 py-6">Copyright © 2024 POCF. All Rights Reserved.</p>
     </div>
 </footer>
+<Membership />
 

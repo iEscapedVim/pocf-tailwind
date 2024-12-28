@@ -4,6 +4,7 @@ import { Image } from 'astro:assets';
 
 import Logo from '@imgs/logo.png';
 import Menu from '@comps/menu.astro';
+import Membership from '@comps/members/membership.astro';
 ---
 <header class="w-full flex flex-col">
     <!-- Top Bar -->
@@ -27,10 +28,10 @@ import Menu from '@comps/menu.astro';
             <Image src={Logo} alt="POCF Logo" />
         </div>
         <div class="flex justify-center lg:justify-end items-center">
-            <a href="#make-member" class="py-2 px-3 lora italic text-[11px] md:text-sm font-bold flex flex-row justify-center items-center gap-2 group bg-secondary text-white hover:bg-primary hover:text-secondary">
-              <Icon name="heart" class="text-primary group-hover:text-secondary w-5 h-auto" />
-              Become a Member
-            </a>
+            <button class="make-member-button border-0 focus:border-0 ring-0 focus:ring-0 outline-0 focus:outline-0 py-2 px-3 lora italic text-[11px] md:text-sm font-bold flex flex-row justify-center items-center gap-2 group bg-secondary text-white hover:bg-primary hover:text-secondary">
+                <Icon name="heart" class="text-primary group-hover:text-secondary w-5 h-auto" />
+                Become a Member
+            </button>
         </div>
     </div>
     <!-- Navbar -->
@@ -48,8 +49,8 @@ import Menu from '@comps/menu.astro';
       </div>
   </nav>
 </header>
-
-  <style>
+<Membership />
+<style>
     nav li a {
         padding-top: 15px;
         padding-bottom: 15px;
@@ -75,5 +76,5 @@ import Menu from '@comps/menu.astro';
         width: 100%;
         margin-top: 1px;
     }
-  </style>
+</style>
   
