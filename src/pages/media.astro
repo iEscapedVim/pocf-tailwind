@@ -1,34 +1,50 @@
 ---
 import Layout from '@layouts/SinglePages.astro'
 import { getCollection } from "astro:content";
+const media = await getCollection("media");
+const filters = await getCollection("mediafilters");
 
+import Gallery from '@comps/media/gallery.astro';
+import Filters from '@comps/media/filters.astro'
 ---
 <Layout title="Media">
 <section class="w-11/12 mx-auto py-12 flex flex-col justify-center items-center portfolio-wrapper">
-
-    <div id="btnContainer" class="flex items-center justify-center py-4 md:py-8 flex-wrap gap-5 lora italic font-normal mb-12">
-        <button onclick="filterSelection('all')" type="button" class="capitalize border border-primary rounded-full py-2 px-5 hover:bg-primary bg-secondary text-white">All categories</button>
-        <button onclick="filterSelection('children')" type="button" class="capitalize border border-primary rounded-full py-2 px-5 hover:bg-primary">Children</button>
-        <button onclick="filterSelection('event')" type="button" class="capitalize border border-primary rounded-full py-2 px-5 hover:bg-primary">Events</button>
-        <button onclick="filterSelection('media')" type="button" class="capitalize border border-primary rounded-full py-2 px-5 hover:bg-primary">Media</button>
+    
+    <div class="filter-menu flex items-center justify-center py-4 md:py-8 flex-wrap gap-5 lora italic font-normal mb-12">
+        <button data-target="all" class="outline-0 ring-0 focus:ring-0 focus:outline-0 capitalize border border-primary rounded-full py-2 px-5 hover:bg-primary bg-secondary text-white" onclick="setActive(this)">All categories</button>
+        {filters.map((f: any) => (
+            <Filters filter={f} />
+        ))}
     </div>
 
     <div class="p-5 sm:p-8">
-        <div class="columns-1 gap-5 sm:columns-2 sm:gap-8 md:columns-3 lg:columns-4 [&>img:not(:first-child)]:mt-8">
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg" alt="">
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg" alt="">
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg" alt="">
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg" alt="">
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg" alt="">
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg" alt="">
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg" alt="">
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg" alt="">
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg" alt="">
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg" alt="">
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-10.jpg" alt="">
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-11.jpg" alt="">
+        <div class="columns-1 gap-5 sm:columns-2 sm:gap-8 md:columns-3 lg:columns-4 [&>div:not(:first-child)]:mt-8">
+            {media.map((m: any) => (
+                <Gallery media={m} />
+            ))}
         </div>
     </div>
 </section>
+<script is:inline>
+    function setActive(button) {
+        const buttons = document.querySelectorAll('.filter-menu button');
+        buttons.forEach(btn => btn.classList.remove('bg-secondary', 'text-white', 'transition', 'duration-300', 'ease-in-out'));
+        button.classList.add('bg-secondary', 'text-white', 'transition', 'duration-300', 'ease-in-out');
 
+        const images = document.querySelectorAll('.columns-1 > div');
+        const target = button.getAttribute('data-target');
+        images.forEach(img => {
+            if (target === 'all') {
+                img.classList.remove('hidden', 'transition', 'duration-300', 'ease-in-out');
+            } else {
+                if (img.getAttribute('data-item') === target) {
+                    img.classList.remove('hidden', 'transition', 'duration-300', 'ease-in-out');
+                } else {
+                    img.classList.add('hidden', 'transition', 'duration-300', 'ease-in-out');
+                }
+            }
+        });
+    }
+</script>
 </Layout>
+
