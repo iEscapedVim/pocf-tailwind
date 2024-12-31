@@ -25,11 +25,14 @@ const { title } = Astro.props;
 import Head from '@comps/head.astro';
 import Header from '@comps/header.astro';
 import Footer from '@comps/footer.astro';
+
+import Loader from '@comps/loader.astro';
 ---
 
 
 <!doctype html>
 <html lang="en">
+	<Loader />
 	<Head>
 		<title>{title}</title>
 	</Head>

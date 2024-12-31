@@ -2,7 +2,7 @@
 const { post } = Astro.props;
 const { quoteby, quote } = post.data;
 ---
-<div class="bg-gray-100 p-3 rounded-lg my-4 flex flex-col gap-2 lora italic text-lg font-semibold">
-    <p>“ {quote} ” </p>
-    <h6><em>- {quoteby} </em></h6>
+<div class="bg-gray-100 p-3 rounded-lg my-4 flex flex-col gap-2 lora italic text-lg">
+    <p>{'"' + quote + '"' }</p>
+    <h6 class="font-bold"><em>- {quoteby} </em></h6>
 </div>

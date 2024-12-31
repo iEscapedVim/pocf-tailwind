@@ -25,10 +25,8 @@ const recentMedia = await getCollection("media");
     </div>
     <div class="flex flex-col pb-20">
         <h3 class="text-2xl font-bold m-0 p-0 lora italic pb-8">Image Gallery</h3>
-        <div class="popup-gallery">
-            <ul class="items gallery-item grid grid-cols-12 gap-3">
-                {recentMedia.slice(0, 6).map((m: any) => <GalleryWidget media={m}/>)}
-            </ul>
+        <div class="cols-span-4 columns-3 gap-3 [&>div:not(:first-child)]:mt-4">
+            {recentMedia.slice(0, 6).map((m: any) => <GalleryWidget media={m}/>)}
         </div>  
     </div>
 

@@ -27,11 +27,14 @@ import Quotescard from '@comps/stories/quotescard.astro';
 
 import { getCollection } from 'astro:content';
 const randomQuote = await getCollection("quotes");
+
+import Loader from '@comps/loader.astro';
 ---
 
 
 <!doctype html>
 <html lang="en">
+    <Loader />
 	<Head>
         <title>
 			{frontmatter.title}
