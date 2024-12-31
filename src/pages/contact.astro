@@ -21,7 +21,7 @@ import { Icon } from 'astro-icon/components';
       
                   <div>
                     <label class="text-gray-400 font-normal text-md" for="phone">Phone <span class="text-red-600 text-xl">*</span></label>
-                    <input required class="w-full rounded-lg border-gray-200 border-solid border-b border-0 bg-transparent text-xl focus:ring-0 focus:border-b-2 focus:border-primary outline-0" type="tel" name="phone" />
+                    <input required class="w-full rounded-lg border-gray-200 border-solid border-b border-0 bg-transparent text-xl focus:ring-0 focus:border-b-2 focus:border-primary outline-0" type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" name="phone" />
                   </div>
                 </div>
                 <div>
