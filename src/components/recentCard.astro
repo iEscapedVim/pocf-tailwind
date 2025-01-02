@@ -10,7 +10,7 @@ const month = date.toLocaleString('en-US', { month: 'short' });
 const day = date.getDate();
 const formattedDate = `${day} ${month}`;
 ---
-<div class="w-full col-span-12 md:col-span-6 grid grid-cols-7 gap-6 mt-12">
+<div class="w-full col-span-6 grid grid-cols-7 gap-6 mt-12">
     <div class="col-span-12 md:col-span-4">
         <a href={`/stories/${post.slug}`}>
             <Image class="w-full h-auto" src={image} alt={imagealt} />
