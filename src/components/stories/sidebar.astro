@@ -4,19 +4,16 @@ import Recentcard from "./recentside.astro";
 import { getCollection } from 'astro:content';
 const recentPosts = await getCollection("stories");
 
-
 import GalleryWidget from '@comps/media/sidebarwidget.astro';
 const recentMedia = await getCollection("media");
+
+import Categories from "@comps/stories/categories.astro";
 ---
 <div class="flex flex-col my-12">
     <div class="flex flex-col pb-12">
         <h3 class="text-2xl font-bold m-0 p-0 lora italic">Categories</h3>
         <ul class="py-4">
-            <li class="list-none py-2 border-b border-primary border-solid border-0 lato italic capitalize"><a href="#."> All (52)</a></li>
-            <li class="list-none py-2 border-b border-primary border-solid border-0 lato italic capitalize"><a href="#."> Food  (11)</a></li>
-            <li class="list-none py-2 border-b border-primary border-solid border-0 lato italic capitalize"><a href="#."> Disease (10) </a></li>
-            <li class="list-none py-2 border-b border-primary border-solid border-0 lato italic capitalize"><a href="#."> Nature  (52)</a></li>
-            <li class="list-none py-2 border-b border-primary border-solid border-0 lato italic capitalize"><a href="#."> Education  (52)</a></li>
+            <Categories />
         </ul>
     </div>
     <div class="flex flex-col pb-12">

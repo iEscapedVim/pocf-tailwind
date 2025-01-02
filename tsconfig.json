@@ -16,6 +16,7 @@
       "@comps/*": [ "src/components/*" ],
       "@layouts/*": [ "src/layouts/*" ],
       "@pages/*": [ "src/pages/*" ],
+      "@utils/*": [ "src/utils/*" ],
       "@nodes/*": [ "node_modules/*"],
       "@bootstrap/*": [ "node_modules/bootstrap/dist/*"],
       "@animate/*": [ "node_modules/animate.css/*"],

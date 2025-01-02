@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+const categories = await getCollection('stories');
+
+const categoryCounts = categories.reduce((acc: Record<string, number>, story) => {
+  const category = story.data.category as string;
+  acc[category] = (acc[category] || 0) + 1;
+  return acc;
+}, {});
+
+const uniqueCategories = Array.from(new Set(categories.map(s => s.data.category)));
+---
+<li class="list-none py-2 border-b border-primary border-solid border-0 lato italic capitalize">
+    <a href="/stories/"> All ({categories.length})</a>
+</li>
+{uniqueCategories.filter(category => category !== null && category !== undefined).map(category => {
+  return (
+  <li class="list-none py-2 border-b border-primary border-solid border-0 lato italic capitalize">
+      <a href={`/stories/category/${category.toLowerCase()}`}>
+        {category} ({categoryCounts[category]})
+      </a>
+  </li>
+  );
+})}

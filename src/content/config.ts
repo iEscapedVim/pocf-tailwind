@@ -29,6 +29,7 @@ const stories = defineCollection({
 	  author: z.string(reference('team')).optional(),
 	  category: z.string().optional(),
       tags: z.array(z.string()).optional(),
+	  draft: z.string(),
     })
 });
 
