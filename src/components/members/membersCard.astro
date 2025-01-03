@@ -2,7 +2,7 @@
 import { Image } from "astro:assets"
 
 const { member } = Astro.props;
-const { name, description, image, imagealt, joined, role, location } = member.data;
+const { name, description, image, imagealt, joined, location } = member.data;
 
 const date = new Date(joined);
 const year = date.getFullYear();
@@ -11,19 +11,20 @@ const day = date.getDate();
 const formattedDate = `${day} ${month}`;
 ---
 <div class="relative flex flex-col justify-start items-center gap-4 col-span-6 md:col-span-3 bg-white w-full text-center mt-24 rounded-md px-2">
-    <div class="-mt-28 bg-gradient-to-b from-white to-primary rounded-full">
+    <div class="-mt-28 bg-gradient-to-b from-white to-primary rounded-full w-3/5 h-auto">
         <Image class="rounded-full p-1" src={image} alt={imagealt} />
     </div>
     <h4 class="text-[22px] font-bold capitalize lora">
         {name}
     </h4>
-    <p class="flex flex-col text-[16px] text-gray-500 gap-2 lato font-bold">
+    <p class="flex flex-col text-[16px] text-gray-500 gap-2 lato font-normal">
         {description}
-        <span class="text-[12px] text-gray-400 montserrat">
-            {role}, {location}
-        </span>
     </p>
-    <span class="lora border-0 border-b-2 border-solid border-[#b4b4b4]">Member Since: 
+    <span class="lora border-0 border-b-2 border-solid border-[#b4b4b4]">
+        <span class="text-[14px] text-gray-400 font-semibold montserrat">
+            {location}
+        </span><br />
+        Member Since: 
         <time datetime={joined} class="font-bold py-2 text-primary">{formattedDate}, {year}</time>
     </span>
 </div>

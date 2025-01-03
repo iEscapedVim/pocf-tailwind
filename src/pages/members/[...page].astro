@@ -8,7 +8,7 @@ const randomQuote = await getCollection("quotes");
 
 export async function getStaticPaths({ paginate }: { paginate: (posts: any[], options: { pageSize: number }) => any }) {
     const allMembers = await getCollection("members");
-    return paginate(allMembers, { pageSize: 5 });
+    return paginate(allMembers, { pageSize: 12 });
 }
 
 const { page }: any = Astro.props;

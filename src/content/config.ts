@@ -74,7 +74,7 @@ const members = defineCollection({
     type: 'content',
     schema: ({ image }) => z.object({
       name: z.string(),
-	  description: z.string(),
+	  description: z.string().optional(),
       joined: z.date(),
       image: image(),
 	  imagealt: z.string(),
