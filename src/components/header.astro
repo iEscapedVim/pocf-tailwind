@@ -4,6 +4,8 @@ import { Image } from 'astro:assets';
 
 import Logo from '@imgs/logo.png';
 import Menu from '@comps/menu.astro';
+
+import Membership from './members/membership.astro';
 ---
 <header class="w-full flex flex-col">
     <!-- Top Bar -->
@@ -31,6 +33,7 @@ import Menu from '@comps/menu.astro';
                 <Icon name="heart" class="text-primary group-hover:text-secondary w-5 h-auto" />
                 Become a Member
             </button>
+            <Membership />
         </div>
     </div>
     <!-- Navbar -->
