@@ -55,10 +55,10 @@ const media = defineCollection({
 const orphans = defineCollection ({
 	type: "data",
 	schema: z.object({
-		total: z.string(),
-		boys: z.string(),
-		girls: z.string(),
-		reachedmilestone: z.string(),
+		total: z.number(),
+		boys: z.number(),
+		girls: z.number(),
+		reachedmilestone: z.number(),
 	}),
 });
 
@@ -136,4 +136,4 @@ const testimonials = defineCollection({
     }),
 });
 
-export const collections = {members, slides, stories, faqs, team, media, mediafilters, testimonials, policies, stats, quotes};
+export const collections = {members, slides, stories, faqs, orphans, team, media, mediafilters, testimonials, policies, stats, quotes};

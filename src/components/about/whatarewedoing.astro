@@ -3,6 +3,7 @@ import { Icon } from "astro-icon/components";
 import bgMap from '@imgs/map-what-we.png';
 
 import { getCollection } from 'astro:content';
+import Membership from "../members/membership.astro";
 const orphansDetails = await getCollection("orphans");
 ---
 <section class="w-full grid grid-cols-1 gap-4 lg:grid-cols-6 lg:gap-8 py-20 px-24">
@@ -41,7 +42,8 @@ const orphansDetails = await getCollection("orphans");
             {orphansDetails.reduce((sum, orphan) => sum + Number(orphan.data.total), 0).toLocaleString()}    
         </span> orphans under its care, 20-reputable INGOs/NGOs part of this forum.</span></h3>
         <div class="flex flex-row gap-3 font-bold text-[11px]">
-            <a href="#." class="uppercase bg-secondary text-white hover:text-secondary hover:bg-white py-2 px-4">Join Us!</a> 
+            <button class="make-member-button uppercase bg-secondary text-white hover:text-secondary hover:bg-white py-2 px-4">Join Us!</button> 
+            <Membership />
         </div>
     </div>
 </section>

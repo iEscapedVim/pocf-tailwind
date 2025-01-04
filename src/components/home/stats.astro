@@ -49,11 +49,11 @@ import { Icon } from "astro-icon/components";
         </div>
     </div>
 </section>
-
 <script>
     import counterUp from 'counterup2'
+    document.addEventListener('astro:page-load', () => {
     const counters = document.querySelectorAll( '.counter' )
-    counters.forEach( counter => {
+        counters.forEach( counter => {
         const observer = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
                 counterUp( counter, {
@@ -61,8 +61,9 @@ import { Icon } from "astro-icon/components";
                     delay: 16,
                 } )
                 observer.unobserve(counter);
-            }
-        }, { rootMargin: '0px 0px -200px 0px' });
+                }
+            }, { rootMargin: '0px 0px -200px 0px' });
         observer.observe(counter);
-    })
+    });
+});    
 </script>
