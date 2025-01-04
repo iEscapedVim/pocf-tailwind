@@ -10,6 +10,6 @@ import MembersCard from '@comps/members/membersCard.astro';
         <p class="capitalize text-secondary lato font-bold">Our charity helps those people who have no hope</p>
     </div>
     <div class="w-11/12 mx-auto grid grid-cols-6 md:grid-cols-12 gap-12 mt-24">
-        {members.sort((a, b) => new Date(b.data.joined).getTime() - new Date(a.data.joined).getTime()).slice(0, 4).map((m: any) => <MembersCard member={m}/>)}
+        {members.sort((a: { data: { joined: string | number | Date; }; }, b: { data: { joined: string | number | Date; }; }) => new Date(b.data.joined).getTime() - new Date(a.data.joined).getTime()).slice(0, 4).map((m: any) => <MembersCard member={m}/>)}
     </div>
 </section>

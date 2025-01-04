@@ -4,7 +4,7 @@ const { slide } = Astro.props;
 const { title, image, imagealt, description, buttontext, buttonurl } = slide.data;
 const htmlString = title;
 ---
-<div class="duration-700 ease-in-out absolute inset-0 transition-all transform translate-x-0 z-20" data-carousel-item="">
+<div class="duration-700 ease-in-out absolute inset-0 transition-all transform translate-x-0 z-20" data-carousel-item="active">
     <Image src={image} alt={imagealt} class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" /> 
     <span class="absolute top-1/2 left-1/2 text-2xl font-semibold text-white -translate-x-1/2 -translate-y-1/2 sm:text-3xl">
         <h1 set:html={htmlString} class="w-full md:w-4/5 md:leading-[70px] font-montserrat uppercase font-normal text-sm md:text-[45px] [&>span]:font-bold [&>span]:text-secondary"/>

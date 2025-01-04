@@ -1,6 +1,6 @@
-<script>
-    window.addEventListener("load", function () {
-        const loader = document.querySelector(".preloader") as HTMLElement;
+<script is:inline >    
+    setTimeout(() => {
+        const loader = document.querySelector(".preloader");
         if (loader) {
             loader.style.opacity = "0";
             loader.style.visibility = "hidden";
@@ -8,7 +8,7 @@
                 loader.style.display = "none";
             }, 500);
         }
-    });
+    }, 900);
 </script>
 
 <div class="preloader">

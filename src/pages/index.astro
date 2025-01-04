@@ -6,14 +6,13 @@ import Stats from '@comps/home/stats.astro';
 import RecentMembers from '@comps/recentmembers.astro';
 import RecentStories from '@comps/recentStories.astro';
 import Testimonials from '@comps/testimonials.astro';
-import Volunteers from '@/components/volunteers.astro';
-import Membership from '@/components/members/membership.astro';
+import Volunteers from '@comps/volunteers.astro';
+import Loader from '@comps/loader.astro';
 ---
 
 <Layout title='Pakistan Orphan Care Form'>
-    
+    <Loader />
     <Hero />
-    <Membership />
     <Howhelp />
     <Stats />
     <RecentMembers />

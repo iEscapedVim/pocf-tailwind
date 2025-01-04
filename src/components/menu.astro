@@ -3,6 +3,7 @@
 ---
 
 <script>
+    document.addEventListener('astro:page-load', () => {
     const currentLocation = window.location.href;
     const menuItems = document.querySelectorAll('ul.menu>li');
     menuItems.forEach(item => {
@@ -14,6 +15,7 @@
             item.classList.add('border-t-2');
         }
     })
+});
 </script>
 
 <ul class="menu flex flex-row gap-5 lora uppercase font-semibold text-sm">
