@@ -10,7 +10,7 @@ const month = date.toLocaleString('en-US', { month: 'short' });
 const day = date.getDate();
 const formattedDate = `${day} ${month}`;
 ---
-<div class="relative flex flex-col justify-start items-center gap-4 col-span-6 md:col-span-3 bg-white w-full text-center mt-24 rounded-md px-2">
+<div class="relative flex flex-col justify-between items-center gap-4 col-span-6 md:col-span-3 bg-white w-full text-center mt-24 rounded-md px-2">
     <div class="-mt-28 bg-gradient-to-b from-white to-primary rounded-full w-3/5 h-auto">
         <Image class="rounded-full p-1" src={image} alt={imagealt} />
     </div>

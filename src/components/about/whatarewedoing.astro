@@ -1,43 +1,46 @@
 ---
 import { Icon } from "astro-icon/components";
 import bgMap from '@imgs/map-what-we.png';
+
+import { getCollection } from 'astro:content';
+const orphansDetails = await getCollection("orphans");
 ---
 <section class="w-full grid grid-cols-1 gap-4 lg:grid-cols-6 lg:gap-8 py-20 px-24">
     <div class="w-11/12 mx-auto lg:col-span-4 bg-center bg-no-repeat" style={{ backgroundImage: `url(${bgMap.src})` }}>
         <h2 class="lora italic text-[35px] font-bold leading-[45px] uppercase">What <br /><small class="text-[30px] inline-block text-black capitalize">We are doing?</small></h2>
         <hr class="border-1 border-primary w-44 my-3" />
-        <h6 class="font-bold lora italic my-2">We Help 70,0000 Childs, turn tears to smiles. </h6>
-        <p class="text-gray-500">Enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea cmodo conse quat. Duis aute irure dolor in reprehenderit inas voluptate velit esse cillum...</p>
+        <h6 class="font-bold lora italic my-2">
+            We helped {orphansDetails.reduce((sum, orphan) => sum + Number(orphan.data.total), 0).toLocaleString()} orphans, across 166 districts in the country, ensuring that vulnerable children are not left behind.
+        </h6>
+        <p class="text-gray-500">
+            With 44 dedicated orphanages operated by member organizations, POCF is creating a safe and nurturing environment for these children, empowering them to build brighter futures and break the cycle of poverty. 6,837 orphans have reached the milestone of pursuing college and university education, reflecting POCF’s commitment to nurturing future leaders.
+        </p>
         <div class="grid grid-cols-1 lg:grid-cols-9 gap-4 py-6 px-6 lora italic">
             <div class="flex flex-col col-span-3">
                 <Icon name="books" class="text-primary w-10 h-auto" />
                 <h4 class="font-bold text-2xl">Education</h4>
                 <p class="text-lg text-gray-500">Aperiam, eaque ipsa quae illo sath
                 inventore veritatis et quasi.</p>
-                <a class="bt-lora text-primary italic" href="#.">Learn More</a>
             </div>
             <div class="flex flex-col col-span-3">
                 <Icon name="heartplus" class="text-primary w-10 h-auto" />
                 <h4 class="font-bold text-2xl">Health</h4>
                 <p class="text-lg text-gray-500">Aperiam, eaque ipsa quae illo sath
                 inventore veritatis et quasi.</p>
-                <a class="bt-lora text-primary italic" href="#.">Learn More</a>
             </div>
             <div class="flex flex-col col-span-3">
                 <Icon name="food" class="text-primary w-10 h-auto" />
                 <h4 class="font-bold text-2xl">Food</h4>
                 <p class="text-lg text-gray-500">Aperiam, eaque ipsa quae illo sath
                 inventore veritatis et quasi.</p>
-                <a class="bt-lora text-primary italic" href="#.">Learn More</a>
             </div>                        
         </div>
     </div>
     <div class="bg-primary/80 px-4 lg:px-8 py-3 lg:col-span-2 mx-2 flex flex-col justify-center items-center gap-8 text-2xl lato">
-        <h3 class="text-white leading-[35px] font-[600]">Last year Area of Hope  supported Programs That  Served Over 
-            <span class="text-secondary font-[800]"> 700,000 Children in <br> 23 Countries </span>
-        </h3>
+        <h3 class="text-white leading-[35px] font-[600]">POCF has emerged as a strong and impactful platform, significantly transforming the lives of orphans across Pakistan. <span class="text-secondary font-[800]"> <span class="counter">
+            {orphansDetails.reduce((sum, orphan) => sum + Number(orphan.data.total), 0).toLocaleString()}    
+        </span> orphans under its care, 20-reputable INGOs/NGOs part of this forum.</span></h3>
         <div class="flex flex-row gap-3 font-bold text-[11px]">
-            <a href="#." class="uppercase bg-white text-secondary hover:text-white hover:bg-secondary py-2 px-4">View Our Program</a> 
             <a href="#." class="uppercase bg-secondary text-white hover:text-secondary hover:bg-white py-2 px-4">Join Us!</a> 
         </div>
     </div>

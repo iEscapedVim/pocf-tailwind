@@ -52,6 +52,16 @@ const media = defineCollection({
     })
 });
 
+const orphans = defineCollection ({
+	type: "data",
+	schema: z.object({
+		total: z.string(),
+		boys: z.string(),
+		girls: z.string(),
+		reachedmilestone: z.string(),
+	}),
+});
+
 const mediafilters = defineCollection ({
 	type: "data",
 	schema: z.object({
