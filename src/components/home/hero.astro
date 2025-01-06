@@ -5,19 +5,31 @@ import { getCollection } from 'astro:content';
 const Slide = await getCollection("slides");
 
 ---
-<div id="default-carousel" class="relative w-full" data-carousel="slide">
-    <!-- Carousel wrapper -->
-    <div class="relative h-56 overflow-hidden md:h-[440px]">
-        <!-- Slider Items -->
+<section class="w-full h-full swiper mySwiper">
+    <div class="swiper-wrapper">
         {Slide.map((s: any) => <Slides slide={s} />)}
     </div>
-    <!-- Slider controls -->
-    <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-        <Icon name="arrowleft" class="w-12 h-auto text-secondary" />
-        <span class="sr-only">Previous</span>
-    </button>
-    <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-        <Icon name="arrowright" class="w-12 h-auto text-secondary" />
-        <span class="sr-only">Next</span>
-    </button>
-</div>
+    <div class="swiper-pagination [&>.swiper-pagination-bullet-active-next]:bg-secondary [&>.swiper-pagination-bullet-active-main]:bg-primary"></div>
+</section>
+<script>
+    import Swiper from 'swiper';
+    import 'swiper/css/bundle';
+    import {Autoplay, Pagination } from 'swiper/modules';
+    
+    document.addEventListener('astro:page-load', () => {    
+        var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        loop: true,
+        grabCursor: true,
+        autoplay: {
+            delay: 2000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+            dynamicBullets: true,
+        },
+        });
+    });
+</script>

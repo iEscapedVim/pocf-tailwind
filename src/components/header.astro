@@ -51,6 +51,27 @@ import Membership from './members/membership.astro';
       </div>
   </nav>
 </header>
+<script>
+    document.addEventListener('astro:page-load', () => {
+        const button = document.querySelector('[data-collapse-toggle="navbar-default"]');
+        const menu = document.getElementById('navbar-default');
+
+        if (button && menu) {
+            button.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768) {
+                    menu.classList.remove('hidden');
+                } else {
+                    menu.classList.add('hidden');
+                }
+            });
+        }
+    });
+</script>
+
 <style>
     nav li a {
         padding-top: 15px;
@@ -78,4 +99,3 @@ import Membership from './members/membership.astro';
         margin-top: 1px;
     }
 </style>
-  
