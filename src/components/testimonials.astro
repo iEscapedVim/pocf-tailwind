@@ -31,6 +31,8 @@ const allTestimonials = await getCollection("testimonials");
     import Swiper from 'swiper';
     import 'swiper/css/bundle';
     import {Autoplay, Pagination } from 'swiper/modules';
+    
+document.addEventListener('astro:page-load', () => {    
     Swiper.use([Autoplay, Pagination]);
 
     // init Swiper:
@@ -45,6 +47,7 @@ const allTestimonials = await getCollection("testimonials");
             dynamicBullets: true,
         },
     });
+});    
 </script>
 
 <style>
