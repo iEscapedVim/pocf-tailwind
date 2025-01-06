@@ -27,8 +27,6 @@ import Quotescard from '@comps/stories/quotescard.astro';
 
 import { getCollection } from 'astro:content';
 const randomQuote = await getCollection("quotes");
-
-import Loader from '@comps/loader.astro';
 ---
 <!doctype html>
 <html lang="en">
@@ -39,7 +37,6 @@ import Loader from '@comps/loader.astro';
 	</Head>
 	<body>
 		<Header />
-        <Loader />
         <!-- Banner -->
         <div class="w-full h-72 bg-cover bg-center bg-no-repeat bg-secondary bg-blend-overlay flex justify-center items-center" style={{ backgroundImage: `url(${CallOutBG.src})` }}>
             <div class="w-11/12 mx-auto font-bold flex flex-col gap-4 lora italic text-white text-3xl text-center">
