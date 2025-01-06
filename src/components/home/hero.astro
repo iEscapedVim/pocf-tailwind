@@ -9,6 +9,7 @@ const Slide = await getCollection("slides");
     <div class="swiper-wrapper">
         {Slide.map((s: any) => <Slides slide={s} />)}
     </div>
+    <!-- Slider Pagination -->
     <div class="swiper-pagination [&>.swiper-pagination-bullet-active-next]:bg-secondary [&>.swiper-pagination-bullet-active-main]:bg-primary"></div>
 </section>
 <script>
@@ -22,7 +23,7 @@ const Slide = await getCollection("slides");
         loop: true,
         grabCursor: true,
         autoplay: {
-            delay: 2000,
+            delay: 25000,
             disableOnInteraction: false,
         },
         pagination: {
