@@ -25,7 +25,7 @@ const { title } = Astro.props;
 import Head from '@comps/head.astro';
 import Header from '@comps/header.astro';
 import Footer from '@comps/footer.astro';
-
+import { ViewTransitions } from "astro:transitions"
 import Loader from '@comps/loader.astro';
 ---
 
@@ -35,6 +35,7 @@ import Loader from '@comps/loader.astro';
 	<Head>
 		<title>{title}</title>
 	</Head>
+	<ViewTransitions />
 	<body>
 		<Header />
 		<slot />
