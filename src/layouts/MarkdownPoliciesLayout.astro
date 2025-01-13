@@ -25,6 +25,22 @@ import Quotescard from '@comps/stories/quotescard.astro';
 
 import { getCollection } from 'astro:content';
 const randomQuote = await getCollection("quotes");
+
+function formatDate(dateString: string | number | Date) {
+  if (typeof dateString === 'string' && isNaN(Date.parse(dateString))) {
+    return 'Invalid Date';
+  }
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = date.toLocaleString('en-US', { month: 'short' });
+  const day = date.getDate();
+  return `${day} ${month} ${year}`;
+}
+
+const formattedDate = formatDate(frontmatter.pubDate);
+const updatedFormattedDate = formatDate(frontmatter.updatedDate || frontmatter.pubDate);
+
+console.log(frontmatter);
 ---
 <!doctype html>
 <html lang="en">
@@ -46,12 +62,15 @@ const randomQuote = await getCollection("quotes");
                     <li>{frontmatter.title}</li>
                 </ol>
             </div>                    
-        </div>
-		<!-- Article Content -->
+        </div>		<!-- Article Content -->
         <section class="w-11/12 mx-auto grid grid-cols-12 justify-center items-start">
             <div class="col-span-12 md:col-span-12">
                 <!-- Article Data -->
-                <div class="w-11/12 prose-lg prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl prose-h4:text-2xl prose-h5:text-xl prose-h6:text-lg prose-p:text-md prose-p:text-secondary prose-li:text-gray-600 prose-strong:text-gray-800">
+                <div class="w-11/12 prose-lg prose-h2:mt-2 prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl prose-h4:text-2xl prose-h5:text-xl prose-h6:text-lg prose-p:text-md prose-p:text-secondary prose-li:text-gray-600 prose-strong:text-gray-800">
+                    <div class="w-11/12 flex flex-row justify-between font-bold">
+                        <p class="text-black">Published: <span class="font-normal">{formattedDate} </span></p>
+                        <p class="text-black">Last Updated: <span class="font-normal">{updatedFormattedDate}</span></p>
+                    </div>
                     <slot />
                 </div>
                 <br />
