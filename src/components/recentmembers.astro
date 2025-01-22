@@ -2,14 +2,24 @@
 import { getCollection } from 'astro:content';
 const members = await getCollection("members");
 
-import MembersCard from '@comps/members/membersCard.astro';
+import MembersCard from '@comps/members/membersSlide.astro';
+import { Icon } from '@nodes/astro-icon/components';
 ---
 <section class="w-full bg-gray-100 py-16 flex flex-col justify-center items-center">
     <div class="w-11/12 md:w-1/2 mx-auto flex flex-col justify-center items-center">
-        <h2 class="text-[40px] font-normal lora">Latest <b>Members</b></h2>
+        <h2 class="text-[40px] font-normal lora">Our <b>Members</b></h2>
         <p class="capitalize text-secondary lato font-bold">Our charity helps those people who have no hope</p>
     </div>
-    <div class="w-11/12 mx-auto grid grid-cols-6 md:grid-cols-12 gap-12 mt-24">
-        {members.sort((a: { data: { joined: string | number | Date; }; }, b: { data: { joined: string | number | Date; }; }) => new Date(b.data.joined).getTime() - new Date(a.data.joined).getTime()).slice(0, 4).map((m: any) => <MembersCard member={m}/>)}
+    <div class="w-11/12 mx-auto my-12 inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">
+        <ul class="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-infinite-scroll">
+            {members.sort((a: { data: { joined: string | number | Date; }; }, b: { data: { joined: string | number | Date; }; }) => new Date(b.data.joined).getTime() - new Date(a.data.joined).getTime()).map((m: any) => <MembersCard member={m}/>)}
+        </ul>
+        <ul class="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-infinite-scroll" aria-hidden="true">
+            {members.sort((a: { data: { joined: string | number | Date; }; }, b: { data: { joined: string | number | Date; }; }) => new Date(b.data.joined).getTime() - new Date(a.data.joined).getTime()).map((m: any) => <MembersCard member={m}/>)}
+        </ul>
     </div>
+    <a  data-astro-reload href="/members" class="w-44 lora italic flex flex-row justify-between items-center gap-3 bg-primary text-secondary hover:bg-secondary hover:text-white lora uppercase text-[11px] font-bold mt-5">
+        <span class="w-4/5 text-center">View All</span>
+        <Icon name="arrowright" class="text-white bg-secondary flex justify-center items-center p-2 w-8 h-auto"/>
+    </a>
 </section>
