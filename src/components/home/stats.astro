@@ -1,50 +1,54 @@
 ---
 import counterBG from "@imgs/counter-bg.jpg";
 import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+
+import smiles from "src/icons/smiles.svg";
+import girls from "src/icons/girl.svg";
 ---
 <section class="w-full h-56 bg-blend-overlay bg-secondary bg-cover bg-center flex  justify-center items-center py-44" style={`background-image: url(${counterBG.src})`}>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-11/12 mx-auto">
         <div class="flex flex-row w-full gap-5 justify-center items-center">
             <div class="flex flex-col mt-3 gap-4">
-                <Icon name="heart" class="counters w-12 h-auto -mt-1 text-primary" />
+                <Icon name="members" class="counters w-12 h-auto -mt-1 text-primary" />
                 <hr class="border-primary"/>
             </div>
             <div class="flex flex-col mt-3">
-                <span class="counter text-primary text-[35px] font-bold">4512</span>
-                <p class="text-white uppercase montserrat text-sm font-bold m-0">Causes solved</p>
+                <span class="counter text-primary text-[35px] font-bold">20</span>
+                <p class="text-white uppercase montserrat text-sm font-bold m-0">POCF Members</p>
             </div>
         </div>
 
         <div class="flex flex-row w-full gap-5 justify-center items-center">
             <div class="flex flex-col mt-3 gap-4">
-                <Icon name="volunteers" class="counters w-12 h-auto -mt-1 text-primary" />
+                <Icon name="boys" class="counters w-12 h-auto -mt-1 text-primary" />
                 <hr class="border-primary"/>
             </div>
             <div class="flex flex-col mt-3">
-                <span class="counter text-primary text-[35px] font-bold">1024</span>
-                <p class="text-white uppercase montserrat text-sm font-bold m-0">Total Volunteers</p>
+                <span class="counter text-primary text-[35px] font-bold">53978</span>
+                <p class="text-white uppercase montserrat text-sm font-bold m-0">Total Boys</p>
             </div>
         </div>
 
         <div class="flex flex-row w-full gap-5 justify-center items-center">
             <div class="flex flex-col mt-3 gap-4">
-                <Icon name="money" class="counters w-12 h-auto -mt-1 text-primary" />
+                <Image src={girls} alt={"girl emoji"} class="counters w-12 h-auto -mt-1 text-primary" />
                 <hr class="border-primary"/>
             </div>
             <div class="flex flex-col mt-3">
-                <span class="counter text-primary text-[35px] font-bold">$ 5234</span>
-                <p class="text-white uppercase montserrat text-sm font-bold m-0">Donations This Month</p>
+                <span class="counter text-primary text-[35px] font-bold">47358</span>
+                <p class="text-white uppercase montserrat text-sm font-bold m-0">Total Girls</p>
             </div>
         </div>
 
         <div class="flex flex-row w-full gap-5 justify-center items-center">
             <div class="flex flex-col mt-3 gap-4">
-                <Icon name="smile" class="counters w-12 h-auto -mt-1 text-primary" />
+                <Image src={smiles} alt={"smiles emoji"} class="counters w-12 h-auto -mt-1 text-primary" />
                 <hr class="border-primary"/>
             </div>
             <div class="flex flex-col mt-3">
-                <span class="counter text-primary text-[35px] font-bold">77614</span>
-                <p class="text-white uppercase montserrat text-sm font-bold m-0">Smiles Spread</p>
+                <span class="counter text-primary text-[35px] font-bold">101336</span>
+                <p class="text-white uppercase montserrat text-sm font-bold m-0">Total Orphans</p>
             </div>
         </div>
     </div>
