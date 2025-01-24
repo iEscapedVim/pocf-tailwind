@@ -5,8 +5,55 @@ const { media } = Astro.props;
 const { title, image, imagealt, filter } = media.data;
 ---
 <div class="h-auto max-w-full relative flex justify-center" data-item={filter}>
-    <Image class="h-auto max-w-full rounded-lg" src={image} alt={imagealt} />
-    <h4 class="absolute bottom-0 py-1 text-lg lato bg-secondary/40 backdrop-blur-sm w-full text-center text-secondary">
-        {title}
-    </h4>
+    <Image class="h-auto max-w-full rounded-lg hover:cursor-pointer" src={image} alt={imagealt} onclick="openLightbox(event)"/>
 </div>
+
+<script is:inline>
+  function openLightbox(event) {
+    const lightboxContainer = document.createElement('div');
+    lightboxContainer.style.position = 'fixed';
+    lightboxContainer.style.top = 0;
+    lightboxContainer.style.left = 0;
+    lightboxContainer.style.width = '100%';
+    lightboxContainer.style.height = '100%';
+    lightboxContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    lightboxContainer.style.display = 'flex';
+    lightboxContainer.style.justifyContent = 'center';
+    lightboxContainer.style.alignItems = 'center';
+    lightboxContainer.style.zIndex = 1000;
+
+    const img = document.createElement('img');
+    img.src = event.target.src;
+    img.style.maxWidth = '90%';
+    img.style.maxHeight = '90%';
+    img.style.borderRadius = '10px';
+
+    const closeButton = document.createElement('button');
+    closeButton.innerHTML = '&times;';
+    closeButton.style.position = 'absolute';
+    closeButton.style.top = '10px';
+    closeButton.style.right = '10px';
+    closeButton.style.background = 'transparent';
+    closeButton.style.border = 'none';
+    closeButton.style.cursor = 'pointer';
+    closeButton.onclick = () => document.body.removeChild(lightboxContainer);
+
+    lightboxContainer.appendChild(img);
+    lightboxContainer.appendChild(closeButton);
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        document.body.removeChild(lightboxContainer);
+      }
+    });
+
+    lightboxContainer.onclick = event => {
+      if (event.target === lightboxContainer) {
+        document.body.removeChild(lightboxContainer);
+      }
+    };
+
+    document.body.appendChild(lightboxContainer);
+  }
+</script>
+

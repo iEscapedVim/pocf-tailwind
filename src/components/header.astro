@@ -26,7 +26,7 @@ import Membership from './members/membership.astro';
     <!-- Logo & Membership Button -->
     <div class="bg-white text-secondary w-11/12 grid grid-cols-1 md:grid-cols-2 mx-auto gap-6 py-3">
         <div class="flex justify-center lg:justify-start items-center">
-            <Image src={Logo} alt="POCF Logo" />
+            <Image src={Logo} alt="POCF Logo" loading="eager" />
         </div>
         <div class="flex justify-center lg:justify-end items-center">
             <button class="make-member-button border-0 focus:border-0 ring-0 focus:ring-0 outline-0 focus:outline-0 py-2 px-3 lora italic text-[11px] md:text-sm font-bold flex flex-row justify-center items-center gap-2 group bg-secondary text-white hover:bg-primary hover:text-secondary">

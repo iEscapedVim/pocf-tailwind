@@ -27,29 +27,6 @@ const allTestimonials = await getCollection("testimonials");
     </div>
 </section>
 
-<script>
-    import Swiper from 'swiper';
-    import 'swiper/css/bundle';
-    import {Autoplay, Pagination } from 'swiper/modules';
-    
-document.addEventListener('astro:page-load', () => {    
-    Swiper.use([Autoplay, Pagination]);
-
-    // init Swiper:
-    var swiper = new Swiper(".swiper", {
-        loop: true,
-        autoplay: {
-            delay: 2000,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            el: ".swiper-pagination",
-            dynamicBullets: true,
-        },
-    });
-});    
-</script>
-
 <style>
     .testi-slides:before {
         background: url(/src/assets/imgs/quotes.png) top left no-repeat;

@@ -48,7 +48,7 @@ const media = defineCollection({
       image: image(),
 	  imagealt: z.string(),
 	  description: z.string(),
-	  filter: z.array(z.enum(['children', 'event', 'food'])).optional(),
+	  filter: z.array(z.enum(['2023', '2019', '2017', '2015'])).optional(),
     })
 });
 
