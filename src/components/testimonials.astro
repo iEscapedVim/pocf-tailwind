@@ -21,7 +21,7 @@ const allTestimonials = await getCollection("testimonials");
                 </div>
             </div>
         </div>
-        <div class="col-span-9 lg:col-span-4 with-bg-drk relative">
+        <div class="col-span-9 lg:col-span-4 with-bg-drk absolute right-0 bottom-0">
             <Image class="img-responsive" src={Feed} alt="" />
         </div>
     </div>
@@ -32,7 +32,7 @@ const allTestimonials = await getCollection("testimonials");
         background: url(/src/assets/imgs/quotes.png) top left no-repeat;
     }
     .bg-before:before {
-        height: 40px;
+        height: 110px;
         background: #fff;
         content: "";
         position: absolute;

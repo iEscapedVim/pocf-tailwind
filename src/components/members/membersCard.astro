@@ -4,6 +4,8 @@ import { Image } from "astro:assets"
 const { member } = Astro.props;
 const { name, description, image, imagealt, joined, location } = member.data;
 
+if (name === "POCF") return null;
+
 const date = new Date(joined);
 const year = date.getFullYear();
 const month = date.toLocaleString('en-US', { month: 'short' });

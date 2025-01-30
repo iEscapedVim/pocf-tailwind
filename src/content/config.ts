@@ -8,15 +8,6 @@ const faqs = defineCollection ({
 	}),
 });
 
-const stats = defineCollection ({
-	type: "content",
-	schema: ({image}) => z.object ({
-        icon: image().optional(),
-		title: z.string(),
-        count: z.string(),
-	}),
-});
-
 const stories = defineCollection({
     type: 'content',
     schema: ({ image }) => z.object({
@@ -131,9 +122,10 @@ const testimonials = defineCollection({
 	type: "content",
     schema: ({image}) => 
 	z.object({
+		name: z.string().optional(),
 		ref: z.string(reference("members")).optional(),
 		message: z.string(),
     }),
 });
 
-export const collections = {members, slides, stories, faqs, orphans, team, media, mediafilters, testimonials, policies, stats, quotes};
+export const collections = {members, slides, stories, orphans, team, media, mediafilters, testimonials, policies, quotes};

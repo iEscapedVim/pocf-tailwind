@@ -1,14 +1,14 @@
 ---
 const { testimonial } = Astro.props;
-const { ref, message } = testimonial.data;
+const { name: testimonialname, ref, message } = testimonial.data;
 
 import { Icon } from "astro-icon/components";
 import { getEntry } from "astro:content";
 // fetch client details
 const member = await getEntry("members", ref);
-let name, role;
+let membername;
 if (member) {
-  ({ name, role } = member.data);
+  ({ name: membername } = member.data);
 }
 ---
 <blockquote class="py-8 hover:cursor-grab swiper-slide text-xl lora italic font-semibold text-secondary flex flex-col">
@@ -17,7 +17,7 @@ if (member) {
     <p>"{message}"</p>
   </div>
   <div class="flex flex-col text-sm text-start items-end font-normal gap-0 text-gray-600">
-    <p>{name}</p>
-    <p class="text-gray-500">{role}</p>
+    <p class="text-gray-500">{testimonialname}</p>
+    <p>{membername}</p>
   </div>
 </blockquote>

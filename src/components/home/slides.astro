@@ -1,12 +1,11 @@
 ---
-import { Image } from "astro:assets";
 const { slide } = Astro.props;
 const { title, image, description, buttontext, buttonurl } = slide.data;
 const htmlString = title;
 ---
-<div class="w-full bg-cover bg-center swiper-slide" style={{ backgroundImage: `url(${image.src})`, height: "85vh" }}>
+<div class="w-full bg-blend-overlay bg-black/70 bg-cover bg-center swiper-slide" style={{ backgroundImage: `url(${image.src})`, height: "85vh" }}>
     <div class="w-full h-full text-2xl font-semibold text-white sm:text-3xl flex flex-col justify-center items-start px-12 md:px-24">
-        <h1 set:html={htmlString} class="w-full md:w-4/5 md:leading-[70px] font-montserrat uppercase font-normal text-sm md:text-[45px] [&>span]:font-bold [&>span]:text-secondary"/>
+        <h1 set:html={htmlString} class="w-full md:w-4/5 md:leading-[70px] font-montserrat uppercase font-normal text-sm md:text-[45px] [&>span]:font-bold [&>span]:text-primary"/>
         <hr class="border-2 h-0 border-primary w-44 my-2" />
         <p class="lora italic font-bold text-[11px] md:text-xl py-4 leading-3">{description}</p>
         {buttontext && (
