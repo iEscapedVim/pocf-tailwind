@@ -1,13 +1,5 @@
 import { defineCollection, reference, z } from 'astro:content';
 
-const faqs = defineCollection ({
-	type: "content",
-	schema: ({image}) => z.object ({
-		question: z.string(),
-        answer: z.string(),
-	}),
-});
-
 const stories = defineCollection({
     type: 'content',
     schema: ({ image }) => z.object({
@@ -57,6 +49,7 @@ const mediafilters = defineCollection ({
 	type: "data",
 	schema: z.object({
 		title: z.string(),
+		filtername: z.string(),
 	}),
 });
 

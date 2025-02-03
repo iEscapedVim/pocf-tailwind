@@ -1,5 +1,5 @@
 ---
 const { filter } = Astro.props;
-const { title } = filter.data;
+const { title, filtername } = filter.data;
 ---
-<button data-target={title} class="outline-0 ring-0 focus:ring-0 focus:outline-0 capitalize border border-primary rounded-full py-2 px-5 hover:bg-primary" onclick="setActive(this)">{title}</button>
+<button data-target={filtername} class="outline-0 ring-0 focus:ring-0 focus:outline-0 capitalize border border-primary rounded-full py-2 px-5 hover:bg-primary" onclick="setActive(this)">{title}</button>
