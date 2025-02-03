@@ -39,7 +39,7 @@ const media = defineCollection({
       image: image(),
 	  imagealt: z.string(),
 	  description: z.string(),
-	  filter: z.array(z.enum(['2024', '2023', '2019', '2017', '2015'])).optional(),
+	  filter: z.array(z.enum(['wod2024', '2024', '2023', '2019', '2017', '2015'])).optional(),
     })
 });
 
