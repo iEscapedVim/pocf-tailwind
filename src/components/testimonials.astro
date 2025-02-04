@@ -2,7 +2,7 @@
 import TestimonialBG from '@imgs/testi-bg.jpg';
 import TestimonialCard from '@comps/testimonialCard.astro';
 
-import Feed from '@imgs/feed-img.png';
+import Feed from '@imgs/kid.png';
 import { Image } from 'astro:assets';
 
 import { getCollection } from 'astro:content';
@@ -22,7 +22,7 @@ const allTestimonials = await getCollection("testimonials");
             </div>
         </div>
         <div class="col-span-9 lg:col-span-4 with-bg-drk absolute right-0 bottom-0 hidden md:block">
-            <Image class="img-responsive" src={Feed} alt="" />
+            <Image class="w-[445px] h-auto grayscale" src={Feed} alt="" />
         </div>
     </div>
 </section>

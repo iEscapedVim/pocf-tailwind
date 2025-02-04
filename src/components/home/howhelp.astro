@@ -2,25 +2,20 @@
 import { Image } from "astro:assets"
 import { Icon } from "astro-icon/components";
 
-import HelpIcon1 from '@imgs/help-icon-1.png';
-import HelpIcon2 from '@imgs/help-icon-2.png';
-import HelpIcon3 from '@imgs/help-icon-3.png';
-import HelpIcon4 from '@imgs/help-icon-4.png';
-import HelpIcon5 from '@imgs/help-icon-5.png';
-import donateNow from '@imgs/donate-img.png';
+import donateNow from '@imgs/kid.jpg';
 
 import bg1 from '@imgs/rect2.png';
 import bg2 from '@imgs/rect1.png';
 ---
-<section class="w-full grid md:grid-cols-9 grid-cols-1 justify-center items-center pt-12 md:pt-24 px-12 gap-0">
-    <div class="w-full px-6 py-12 md:col-span-4 grid grid-cols-1 md:grid-cols-7 bg-cover bg-no-repeat bg-left" style={`background-image: url(${bg1.src})`}>
+<section class="w-full grid md:grid-cols-11 grid-cols-1 justify-center items-center pt-12 md:pt-24 px-12 gap-0">
+    <div class="w-full px-6 py-12 md:col-span-5 grid grid-cols-1 md:grid-cols-7 bg-cover bg-no-repeat bg-left" style={`background-image: url(${bg1.src})`}>
         <div class="w-11/12 md:col-span-6 flex flex-col gap-4 justify-start items-start">
             <h2 class="lora uppercase text-xl md:text-[55px] font-bold md:leading-[45px]">How <br /><small class=" text-xl md:text-[40px] inline-block font-normal text-black">Can You Help?</small></h2>
             <hr class="border border-primary h-0 my-4 w-44" />
             <p class="text-gray-500 text-sm lato">Member organizations play a key role in promoting POCF’s agenda to like-minded groups supporting orphan children. They are encouraged to attend meetings, participate in events, and host capacity-building sessions to share expertise. Timely payment of annual fees is essential for POCF’s continued operation as a voluntary members' body.</p>
         </div>
     </div>
-    <div class="w-full px-6 py-8 md:-ms-24 md:col-span-3 flex flex-col gap-4 justify-start items-start bg- bg-cover bg-no-repeat bg-left" style={`background-image: url(${bg2.src})`}>
+    <div class="w-full px-6 py-8 md:-ms-24 md:col-span-4 flex flex-col gap-4 justify-start items-start bg- bg-cover bg-no-repeat bg-left" style={`background-image: url(${bg2.src})`}>
         <div class="flex flex-col gap-4 top-0 bottom-0 left-0 right-0 list-none">
             <li class="lora flex flex-col gap-0 md:-mt-[10px]">
                 <span class="flex flex-row gap-3"><Icon name="books" class="text-terary w-7 h-auto" /> Awareness</span>
@@ -44,7 +39,6 @@ import bg2 from '@imgs/rect1.png';
             </li>
         </div>
     </div>
-    <div class="hidden md:flex md:col-span-2 z-50">
-        <Image class="w-full h-auto" src={donateNow} alt="" > 
+    <div class="hidden md:flex md:col-span-2 z-50 w-full h-full m-0 p-0 bg-cover bg-no-repeat scale-x-[-1]" style={`background-image: url(${donateNow.src})`}>
     </div>
 </section>
