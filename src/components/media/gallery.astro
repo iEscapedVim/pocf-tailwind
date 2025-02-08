@@ -2,7 +2,8 @@
 import { Image } from "astro:assets";
 
 const { media } = Astro.props;
-const { title, image, imagealt, filter } = media.data;
+const { image, imagealt, filter } = media.data;
+
 ---
 <div class="h-auto max-w-full relative flex justify-center" data-item={filter}>
     <Image class="h-auto max-w-full rounded-lg hover:cursor-pointer" src={image} alt={imagealt} onclick="openLightbox(event)"/>

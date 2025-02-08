@@ -27,11 +27,11 @@ const quotes = defineCollection({
 const media = defineCollection({
     type: 'content',
     schema: ({ image }) => z.object({
-      title: z.string(),
+      order: z.number(),
       image: image(),
 	  imagealt: z.string(),
-	  description: z.string(),
-	  filter: z.array(z.enum(['wod2024', '2024', '2023', '2019', '2017', '2015'])).optional(),
+	  description: z.string().optional(),
+	  filter: z.array(z.enum(['2024', '2023', '2019', '2017', '2015'])).optional(),
     })
 });
 
