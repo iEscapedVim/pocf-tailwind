@@ -18,7 +18,7 @@ import { Icon } from '@nodes/astro-icon/components';
             {members.sort((a: { data: { joined: string | number | Date; }; }, b: { data: { joined: string | number | Date; }; }) => new Date(b.data.joined).getTime() - new Date(a.data.joined).getTime()).map((m: any) => <MembersCard member={m}/>)}
         </ul>
     </div>
-    <a  data-astro-reload href="/members" class="w-44 lora italic flex flex-row justify-between items-center gap-3 bg-primary text-secondary hover:bg-secondary hover:text-white lora uppercase text-[11px] font-bold mt-5">
+    <a  data-astro-reload href="/members" class="w-44 lora italic flex flex-row justify-between items-center gap-3 bg-primary text-white hover:bg-secondary hover:text-white lora uppercase text-[11px] font-bold mt-5">
         <span class="w-4/5 text-center">View All</span>
         <Icon name="arrowright" class="text-white bg-secondary flex justify-center items-center p-2 w-8 h-auto"/>
     </a>

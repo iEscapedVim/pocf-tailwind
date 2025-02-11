@@ -11,12 +11,10 @@ import Filters from '@comps/media/filters.astro'
 <section class="w-11/12 mx-auto py-12 flex flex-col justify-center items-center portfolio-wrapper">
     
     <div class="filter-menu flex items-center justify-center py-4 md:py-8 flex-wrap gap-5 lora italic font-normal mb-12">
-        <button data-target="all" class="outline-0 ring-0 focus:ring-0 focus:outline-0 capitalize border border-primary rounded-full py-2 px-5 hover:bg-primary bg-secondary text-white" onclick="setActive(this)">All</button>
-        {filters
-            .sort((a: any, b: any) => Number(b.data.filtername) - Number(a.data.filtername))
-            .map((f: any) => (
-                <Filters filter={f} />
-            ))}
+        <button data-target="all" class="outline-0 ring-0 focus:ring-0 focus:outline-0 capitalize border border-primary rounded-full py-2 px-5 bg-primary text-white" onclick="setActive(this)">All</button>
+        {filters.sort((a: any, b: any) => Number(b.data.filtername) - Number(a.data.filtername)).map((f: any) => (
+            <Filters filter={f} />
+        ))}
     </div>
 
     <div class="p-5 sm:p-8">
