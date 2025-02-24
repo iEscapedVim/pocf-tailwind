@@ -27,13 +27,13 @@ const randomQuote = await getCollection("quotes");
 
 const { slug } = Astro.params;
 
-let res = await fetch(`https://posts.gswsolutions.co/pocf/wp-json/wp/v2/posts?slug=${slug}&_embed`);
+let res = await fetch(`https://templates.gswsolutions.co/pocf/wp-json/wp/v2/posts?slug=${slug}&_embed`);
 let [post] = await res.json();
 let tagsRes = await fetch(post._links['wp:term'][1].href); // Assuming tags are the second term link (index 1)
 let tags = await tagsRes.json();
 
 export async function getStaticPaths() {
-  let data = await fetch("https://posts.gswsolutions.co/pocf/wp-json/wp/v2/posts");
+  let data = await fetch("https://templates.gswsolutions.co/pocf/wp-json/wp/v2/posts");
   let posts = await data.json();
 
   return posts.map((post: any) => ({

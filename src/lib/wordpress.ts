@@ -1,4 +1,4 @@
-const WP_GRAPHQL_URL = 'https://posts.gswsolutions.co/pocf/graphql';
+const WP_GRAPHQL_URL = 'https://templates.gswsolutions.co/pocf/graphql';
 
 export async function getPosts(page = 1, perPage = 9) {
   const response = await fetch(WP_GRAPHQL_URL, {
