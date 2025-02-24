@@ -1,0 +1,112 @@
+---
+// Importing All The Fonts
+import '@fontsource-variable/lora';
+import '@fontsource-variable/lora/wght-italic.css';
+import '@fontsource-variable/montserrat/wght-italic.css';
+
+import '@fontsource/lato/100.css';
+import '@fontsource/lato/300.css';
+import '@fontsource/lato/400.css';
+import '@fontsource/lato/700.css';
+import '@fontsource/lato/900.css';
+import '@fontsource/lato/100-italic.css';
+import '@fontsource/lato/300-italic.css';
+import '@fontsource/lato/400-italic.css';
+import '@fontsource/lato/700-italic.css';
+import '@fontsource/lato/900-italic.css';
+
+import Head from '@comps/head.astro';
+import Header from '@comps/header.astro';
+import Footer from '@comps/footer.astro';
+
+import Sidebar from '@comps/stories/sidebar.astro';
+import Quotescard from '@comps/stories/quotescard.astro';
+
+import { getCollection } from 'astro:content';
+const randomQuote = await getCollection("quotes");
+
+const { slug } = Astro.params;
+
+let res = await fetch(`https://templates.gswsolutions.co/pocf/wp-json/wp/v2/posts?slug=${slug}&_embed`);
+let [post] = await res.json();
+let tagsRes = await fetch(post._links['wp:term'][1].href); // Assuming tags are the second term link (index 1)
+let tags = await tagsRes.json();
+
+export async function getStaticPaths() {
+  let data = await fetch("https://templates.gswsolutions.co/pocf/wp-json/wp/v2/posts");
+  let posts = await data.json();
+
+  return posts.map((post: any) => ({
+    params: { slug: post.slug },
+    props: { post: post },
+  }));
+}
+
+function formatDate(dateString: string) {
+  const date = new Date(dateString);
+  const options: Intl.DateTimeFormatOptions = { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  };
+  return date.toLocaleDateString('en-US', options); // Customize locale as needed
+}
+---
+<!doctype html>
+<html lang="en">
+	<Head>
+        <title>
+			{post.title?.rendered}
+		</title>
+	</Head>
+	<body>
+		<Header />
+        <!-- Banner -->
+        <div class="w-full h-96 bg-cover bg-center bg-no-repeat bg-secondary bg-blend-overlay flex justify-center items-center" style={`background-image: url(${post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || 'https://placehold.co/550x300?text=No+Feaured+Image'})`}>
+            <div class="w-11/12 mx-auto font-bold flex flex-col gap-4 lora italic text-white text-3xl text-center">
+                <h3 class="capitalize">{post.title?.rendered || 'Missing Title'}</h3>
+                <!-- Breadcrumbs -->
+                <ol class="flex flex-row gap-2 text-sm font-normal capitalize lora italic w-full justify-center items-center">
+                    <li><a href="/" style="color: #d52127;">Home</a></li>
+                    <li>/</li>
+                    <li><a href="/stories" style="color: #d52127;">Stories</a></li>
+                    <li>/</li>
+                    <li>{post.title?.rendered || 'Missing Title'}</li>
+                </ol>
+            </div>                    
+        </div>
+		<!-- Article Content -->
+        <section class="w-11/12 mx-auto grid grid-cols-12 justify-center items-start">
+            <div class="col-span-12 md:col-span-9">
+                <!-- Article Data -->
+                <div class="w-11/12 mt-12">
+                    <article set:html={post.content.rendered} class="prose-img:rounded-lg prose-headings:font-bold prose-headings:py-3 prose-p:py-2 prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl prose-h4:text-2xl prose-h5:text-2xl prose-h6:text-xl prose-ol:ms-7 prose-ul:ms-7 prose-ol:list-decimal" />
+                    <div class="flex flex-row gap-3 font-bold py-3">
+                        Tags: <span class="flex gap-3 font-normal">{tags.map((tag: any) => (
+                            <p class="bg-gray-200 px-3 py-1 rounded-md text-sm hover:bg-gray-300">
+                              {tag.name}
+                            </p>
+                          ))}</span>
+                    </div>
+                    <span class="mt-3 text-gray-500 flex flex-row justify-between items-center">
+                        <p>
+                            Published: <time datetime={post.date}>{formatDate(post.date)}</time>
+                        </p>
+                        <p>
+                            Author: {post.author?.node?.name || 'Team POCF'}
+                        </p>
+                    </span>
+                </div>
+                <br />
+                <div class="w-11/12">
+                    <!-- Random Quote -->
+                    {randomQuote.sort(() => 0.5 - Math.random()).slice(0, 1).map((p: any) => <Quotescard post={p}/>)}
+                </div>
+            </div>
+            <div class="hidden md:flex col-span-3">
+                <Sidebar />
+            </div>
+        </section>
+		<Footer />
+	</body>
+</html>

@@ -1,45 +1,51 @@
 ---
 import Layout from '@layouts/SinglePages.astro';
 import Sidebar from '@comps/stories/sidebar.astro';
-import Postcard from '@comps/stories/postcard.astro';
 import Quotescard from '@comps/stories/quotescard.astro';
 import Pagination from "@comps/pagination.astro";
+import Postcard from '@comps/stories/postcard.astro';
 
 import { getCollection } from 'astro:content';
 const randomQuote = await getCollection("quotes");
 
-export async function getStaticPaths({ paginate }: { paginate: (posts: any[], options: { pageSize: number }) => any }) {
-    const allPosts = await getCollection("stories");
-    return paginate(allPosts, { pageSize: 5 });
+import { getPosts } from '@libs/wordpress';
+
+export async function getStaticPaths() {
+  const perPage = 9;
+  const posts = await getPosts(1, perPage);
+  const totalPages = Math.ceil(posts.nodes.length / perPage);
+
+  return Array.from({ length: totalPages }, (_, i) => ({
+    params: { page: (i + 1).toString() },
+  }));
 }
 
-const { page }: any = Astro.props;
+const { page } = Astro.params;
+const currentPage = parseInt(page);
+const perPage = 9;
+const posts = await getPosts(currentPage, perPage);
 ---
 <Layout title="Stories | POCF">
     <section class="w-11/12 mx-auto grid grid-cols-12 justify-center items-start">
         <div class="col-span-12 md:col-span-9">
             <!-- Blog Posts -->
-            {page.data.sort((a: { data: { pubDate: string | number | Date; }; }, b: { data: { pubDate: string | number | Date; }; }) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()).map((p: any) => <Postcard post={p}/>)}
+            <div class="grid grid-cols-8 gap-6 w-11/12 mx-auto">{posts.nodes.map((post: any) => <Postcard post={post} />)}</div>
             <br />
-            <div class="w-11/12">
+            <div class="w-11/12 mx-auto">
                 <!-- Random Quote -->
                 {randomQuote.sort(() => 0.5 - Math.random()).slice(0, 1).map((p: any) => <Quotescard post={p}/>)}
                 <!-- Pagination -->
-                <div class="flex flex-row justify-between items-center pb-20">
-                    <Pagination prevUrl={page.url.prev} />
-                        <div class="flex gap-3 lora italic">
-                            {page.url.first ? <a href={page.url.first} class="page">First</a> : null}
-                            <a href={page.currentPage} class="page active">
-                                {page.currentPage}
-                            </a>
-                            {page.url.last ? <a href={page.url.last} class="page">Last</a> : null}
-                        </div>
-                    <Pagination nextUrl={page.url.next} />
+                <div class="flex flex-row justify-between items-center pb-20">    
+                    <Pagination
+                        currentPage={currentPage}
+                        hasNextPage={posts.pageInfo.hasNextPage}
+                        baseUrl="/page/"
+                    />
                 </div> 
             </div>
         </div>
         <div class="hidden md:flex col-span-3">
-            <Sidebar />
+            <Sidebar posts={posts} />
         </div>
     </section>
 
@@ -63,7 +69,7 @@ const { page }: any = Astro.props;
             text-decoration: none !important;
         }
         .active {
-            background: #ecc731;
+            background: #d52127;
             text-decoration: none !important;
         }
     </style>

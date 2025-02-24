@@ -18,6 +18,8 @@
       "@pages/*": [ "src/pages/*" ],
       "@utils/*": [ "src/utils/*" ],
       "@nodes/*": [ "node_modules/*"],
+      "@libs/*": ["src/lib/*"],
+      "@types/": ["src/types/*"]
     },
   }
 }
