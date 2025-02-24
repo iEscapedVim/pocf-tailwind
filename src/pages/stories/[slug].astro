@@ -51,7 +51,6 @@ function formatDate(dateString: string) {
   };
   return date.toLocaleDateString('en-US', options); // Customize locale as needed
 }
-import Loader from '@comps/loader.astro';
 ---
 <!doctype html>
 <html lang="en">
@@ -59,7 +58,6 @@ import Loader from '@comps/loader.astro';
         <title>
 			{post.title?.rendered}
 		</title>
-        <Loader />
 	</Head>
 	<body>
 		<Header />
