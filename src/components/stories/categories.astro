@@ -1,5 +1,5 @@
 ---
-const res = await fetch("https://templates.gswsolutions.co/pocf/wp-json/wp/v2/categories");
+const res = await fetch("https://posts.gswsolutions.co/pocf/wp-json/wp/v2/categories");
 const cats = await res.json();
 const totalPosts = cats.reduce((total: any, cat: { count: any; }) => total + cat.count, 0);
 ---

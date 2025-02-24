@@ -27,13 +27,13 @@ const randomQuote = await getCollection("quotes");
 
 const { slug } = Astro.params;
 
-let res = await fetch(`https://templates.gswsolutions.co/pocf/wp-json/wp/v2/posts?slug=${slug}&_embed`);
+let res = await fetch(`https://posts.gswsolutions.co/pocf/wp-json/wp/v2/posts?slug=${slug}&_embed`);
 let [post] = await res.json();
 let tagsRes = await fetch(post._links['wp:term'][1].href); // Assuming tags are the second term link (index 1)
 let tags = await tagsRes.json();
 
 export async function getStaticPaths() {
-  let data = await fetch("https://templates.gswsolutions.co/pocf/wp-json/wp/v2/posts");
+  let data = await fetch("https://posts.gswsolutions.co/pocf/wp-json/wp/v2/posts");
   let posts = await data.json();
 
   return posts.map((post: any) => ({
@@ -51,27 +51,29 @@ function formatDate(dateString: string) {
   };
   return date.toLocaleDateString('en-US', options); // Customize locale as needed
 }
+import Loader from '@comps/loader.astro';
 ---
 <!doctype html>
 <html lang="en">
 	<Head>
         <title>
-			{post.title.rendered}
+			{post.title?.rendered}
 		</title>
+        <Loader />
 	</Head>
 	<body>
 		<Header />
         <!-- Banner -->
-        <div class="w-full h-96 bg-cover bg-center bg-no-repeat bg-secondary bg-blend-overlay flex justify-center items-center" style={{ backgroundImage: `url(${post._embedded['wp:featuredmedia']['0'].media_details.sizes.large.source_url})` }}>
+        <div class="w-full h-96 bg-cover bg-center bg-no-repeat bg-secondary bg-blend-overlay flex justify-center items-center" style={`background-image: url(${post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || 'https://placehold.co/550x300?text=No+Feaured+Image'})`}>
             <div class="w-11/12 mx-auto font-bold flex flex-col gap-4 lora italic text-white text-3xl text-center">
-                <h3 class="capitalize">{post.title.rendered}</h3>
+                <h3 class="capitalize">{post.title?.rendered || 'Missing Title'}</h3>
                 <!-- Breadcrumbs -->
                 <ol class="flex flex-row gap-2 text-sm font-normal capitalize lora italic w-full justify-center items-center">
                     <li><a href="/" style="color: #d52127;">Home</a></li>
                     <li>/</li>
                     <li><a href="/stories" style="color: #d52127;">Stories</a></li>
                     <li>/</li>
-                    <li>{post.title.rendered}</li>
+                    <li>{post.title?.rendered || 'Missing Title'}</li>
                 </ol>
             </div>                    
         </div>
@@ -93,7 +95,7 @@ function formatDate(dateString: string) {
                             Published: <time datetime={post.date}>{formatDate(post.date)}</time>
                         </p>
                         <p>
-                            Author: {post._embedded?.author?.[0]?.name || 'Admin'}
+                            Author: {post.author?.node?.name || 'Team POCF'}
                         </p>
                     </span>
                 </div>

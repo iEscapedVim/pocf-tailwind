@@ -19,7 +19,7 @@ const formattedDate = format(new Date(post.date), 'MMMM dd, yyyy');
         <h2 class="text-2xl lora italic font-bold m-0 capitalize px-4">{post.title}</h2>
         <hr>
         <p class="text-gray-500 text-sm flex flex-row justify-between px-4">
-            <time datetime={post.date} class="font-normal py-1">{formattedDate}</time> By {post.author.node.name}
+            <time datetime={post.date} class="font-normal py-1">{formattedDate}</time> By {post.author?.node?.name || 'Team POCF'}
         </p>
         <hr>
         <div class="px-4 prose prose-p:text-gray-800" set:html={post.excerpt} />

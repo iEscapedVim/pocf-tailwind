@@ -24,8 +24,10 @@ const { page } = Astro.params;
 const currentPage = parseInt(page);
 const perPage = 9;
 const posts = await getPosts(currentPage, perPage);
+import Loader from '@comps/loader.astro';
 ---
 <Layout title="Stories | POCF">
+    <Loader />
     <section class="w-11/12 mx-auto grid grid-cols-12 justify-center items-start">
         <div class="col-span-12 md:col-span-9">
             <!-- Blog Posts -->
@@ -35,16 +37,17 @@ const posts = await getPosts(currentPage, perPage);
                 <!-- Random Quote -->
                 {randomQuote.sort(() => 0.5 - Math.random()).slice(0, 1).map((p: any) => <Quotescard post={p}/>)}
                 <!-- Pagination -->
-                <div class="flex flex-row justify-between items-center pb-20">    <Pagination
-                    currentPage={currentPage}
-                    hasNextPage={posts.pageInfo.hasNextPage}
-                    baseUrl="/page/"
-                  />
+                <div class="flex flex-row justify-between items-center pb-20">    
+                    <Pagination
+                        currentPage={currentPage}
+                        hasNextPage={posts.pageInfo.hasNextPage}
+                        baseUrl="/page/"
+                    />
                 </div> 
             </div>
         </div>
         <div class="hidden md:flex col-span-3">
-            <Sidebar />
+            <Sidebar posts={posts} />
         </div>
     </section>
 

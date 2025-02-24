@@ -24,7 +24,7 @@ const { category }: { category: {
 } } = Astro.props;
 const posts = await getPostsByCategory(category.slug);
 ---
-<Layout title='Stories By Category'>
+<Layout title={category.name +' | POCF'}>
   
   <section class="w-11/12 mx-auto grid grid-cols-12 justify-center items-start">
     <h1 class="text-4xl col-span-12 mx-auto font-bold mt-8 mb-4">Category: <span class="text-primary">{category.name}</span></h1>
