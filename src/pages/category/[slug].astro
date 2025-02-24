@@ -1,0 +1,48 @@
+---
+import Layout from '@layouts/SinglePages.astro';
+import Sidebar from '@comps/stories/sidebar.astro';
+import Quotescard from '@comps/stories/quotescard.astro';
+import Pagination from "@comps/pagination.astro";
+import Postcard from '@comps/stories/postcard.astro';
+
+import { getCollection } from 'astro:content';
+const randomQuote = await getCollection("quotes");
+
+import { getCategories, getPostsByCategory } from  '@libs/wordpress';
+
+export async function getStaticPaths() {
+  const categories = await getCategories();
+  return categories.map((category: { slug: any; }) => ({
+    params: { slug: category.slug },
+    props: { category },
+  }));
+}
+
+
+const { category }: { category: {
+[x: string]: string; name: string 
+} } = Astro.props;
+const posts = await getPostsByCategory(category.slug);
+---
+<Layout title='Stories By Category'>
+  
+  <section class="w-11/12 mx-auto grid grid-cols-12 justify-center items-start">
+    <h1 class="text-4xl col-span-12 mx-auto font-bold mt-8 mb-4">Category: <span class="text-primary">{category.name}</span></h1>
+    <div class="col-span-12 md:col-span-9">
+        <!-- Blog Posts -->
+        <div class="grid grid-cols-8 gap-6 w-11/12 mx-auto">{posts.map((post: unknown) => <Postcard post={post} />)}</div>
+        <br />
+        <div class="w-11/12 mx-auto">
+            <!-- Random Quote -->
+            {randomQuote.sort(() => 0.5 - Math.random()).slice(0, 1).map((p: any) => <Quotescard post={p}/>)}
+            <!-- Pagination -->
+            <div class="flex flex-row justify-between items-center pb-20">    
+
+            </div> 
+        </div>
+    </div>
+    <div class="hidden md:flex col-span-3">
+        <Sidebar />
+    </div>
+  </section>
+</Layout>

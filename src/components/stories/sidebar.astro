@@ -1,13 +1,9 @@
 ---
 import Recentcard from "./recentside.astro";
-
-import { getCollection } from 'astro:content';
-const recentPosts = await getCollection("stories");
-
-import GalleryWidget from '@comps/media/sidebarwidget.astro';
-const recentMedia = await getCollection("media");
-
 import Categories from "@comps/stories/categories.astro";
+
+let data = await fetch("https://templates.gswsolutions.co/pocf/wp-json/wp/v2/tags");
+let tags = await data.json();
 ---
 <div class="flex flex-col my-12">
     <div class="flex flex-col pb-12">
@@ -17,14 +13,7 @@ import Categories from "@comps/stories/categories.astro";
         </ul>
     </div>
     <div class="flex flex-col pb-12">
-        <h3 class="text-2xl font-bold m-0 p-0 lora italic pb-8">Recent post</h3>
-        {recentPosts.sort((a: { data: { pubDate: string | number | Date; }; }, b: { data: { pubDate: string | number | Date; }; }) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()).slice(0, 3).map((p: any) => <Recentcard post={p}/>)}
+        <h3 class="text-2xl font-bold m-0 p-0 lora italic">Recent Posts:</h3>
+        <Recentcard />
     </div>
-    <div class="flex flex-col pb-20">
-        <h3 class="text-2xl font-bold m-0 p-0 lora italic pb-8">Image Gallery</h3>
-        <div class="cols-span-4 columns-3 gap-3 [&>div:not(:first-child)]:mt-4">
-            {recentMedia.slice(0, 6).map((m: any) => <GalleryWidget media={m}/>)}
-        </div>  
-    </div>
-
 </div>

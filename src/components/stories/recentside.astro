@@ -1,25 +1,35 @@
 ---
+import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 
-const { post } = Astro.props;
-const { title, image, imagealt, pubDate } = post.data;
+const res = await fetch("https://templates.gswsolutions.co/pocf/wp-json/wp/v2/posts?_embed");
+const posts = await res.json();
 
-const date = new Date(pubDate);
-const year = date.getFullYear();
-const month = date.toLocaleString('en-US', { month: 'short' });
-const day = date.getDate();
-const formattedDate = `${day} ${month}`;
+function formatDate(dateString: string) {
+  const date = new Date(dateString);
+  const options: Intl.DateTimeFormatOptions = { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  };
+  return date.toLocaleDateString('en-US', options); // Customize locale as needed
+}
 ---
+{ posts.slice(0, 5).map((post: any) => ( 
 <div class="py-3">
-    <a href={`/stories/${post.slug}/`} class="grid grid-cols-5 justify-center items-center gap-0">
-        <div class="col-span-3">
-            <h3 class="text-capitalize text-lg capitalize lora italic font-bold text-secondary">{title}</h3>
-            <p>
-                <time datetime={pubDate} class="text-md font-normal py-2 -mt-5 mb-5 text-gray-500">{formattedDate}, {year}</time>
-            </p>
-        </div>
-        <div class="col-span-2"> 
-            <Image class="w-full h-auto" src={image} alt={imagealt} > 
-        </div>
+    <a href={`/stories/${post.slug}/`} class="flex flex-col justify-center items-center gap-0">
+        {(post._embedded['wp:featuredmedia']['0']?.media_details.sizes.large.source_url) ? (
+          <Image class="max-w-full rounded-lg h-[300] shadow-lg shadow-gray-300" width={550} height={300} src={post._embedded['wp:featuredmedia']['0'].media_details.sizes.large.source_url} alt={post.title.rendered} />
+        ) : (
+          <Image class="max-w-full rounded-lg h-[300] shadow-lg shadow-gray-300" width={550} height={300} src="https://placehold.co/1920x1080?text=No+Featured+Image" alt={post.title.rendered} />
+        )}
+        <h3 class="text-capitalize text-lg capitalize lora italic font-bold text-secondary">{post.title.rendered}</h3>
+        <span class="text-gray-500 text-sm flex flex-row justify-between w-full py-2">
+            <time datetime={post.date}>{formatDate(post.date)}</time>
+            <p>{post._embedded?.author?.[0]?.name || 'Admin'}</p>
+        </span>
+        {(post.excerpt.rendered)? (<p class="text-gray-600" set:html={post.excerpt.rendered.slice(0, 60)+'...'} />) : (<p class="text-gray-600" set:html={post.content.rendered.slice(0, 60)+'...'} />)}
     </a>
+    <hr class="w-11/12 mx-auto h-0 mt-3 border border-primary" />
 </div>
+))}
