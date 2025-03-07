@@ -27,14 +27,54 @@ const randomQuote = await getCollection("quotes");
 
 const { slug } = Astro.params;
 
-let res = await fetch(`https://templates.gswsolutions.co/pocf/wp-json/wp/v2/posts?slug=${slug}&_embed`);
-let [post] = await res.json();
-let tagsRes = await fetch(post._links['wp:term'][1].href); // Assuming tags are the second term link (index 1)
-let tags = await tagsRes.json();
+let post = null;
+let tags = [];
+
+try {
+  let res = await fetch(`https://posts.pocforum.org/wp-json/wp/v2/posts?slug=${slug}&_embed`);
+  if (!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`);
+  }
+  let contentType = res.headers.get("content-type");
+  if (!contentType || !contentType.includes("application/json")) {
+    throw new Error("Response is not JSON");
+  }
+
+  let data = await res.json();
+  if (data && data.length > 0) {
+    [post] = data;
+    if (post._links && post._links['wp:term'] && post._links['wp:term'][1] && post._links['wp:term'][1].href) {
+      let tagsRes = await fetch(post._links['wp:term'][1].href);
+      if (!tagsRes.ok) {
+        throw new Error(`HTTP error! status: ${tagsRes.status}`);
+      }
+      let tagsContentType = tagsRes.headers.get("content-type");
+      if (!tagsContentType || !tagsContentType.includes("application/json")) {
+        throw new Error("Tags Response is not JSON");
+      }
+      tags = await tagsRes.json();
+    }
+  }
+} catch (error) {
+  console.error("Error fetching or parsing data:", error);
+  // Handle the error (e.g., display an error message)
+}
 
 export async function getStaticPaths() {
-  let data = await fetch("https://templates.gswsolutions.co/pocf/wp-json/wp/v2/posts");
-  let posts = await data.json();
+  let posts = [];
+  try {
+    let data = await fetch("https://posts.pocforum.org/wp-json/wp/v2/posts");
+    if (!data.ok) {
+      throw new Error(`HTTP error! status: ${data.status}`);
+    }
+    let contentType = data.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      throw new Error("getStaticPaths Response is not JSON");
+    }
+    posts = await data.json();
+  } catch (error) {
+    console.error("Error fetching posts for getStaticPaths:", error);
+  }
 
   return posts.map((post: any) => ({
     params: { slug: post.slug },
@@ -49,38 +89,34 @@ function formatDate(dateString: string) {
     month: 'long', 
     day: 'numeric' 
   };
-  return date.toLocaleDateString('en-US', options); // Customize locale as needed
+  return date.toLocaleDateString('en-US', options);
 }
 ---
 <!doctype html>
 <html lang="en">
-	<Head>
+    <Head>
         <title>
-			{post.title?.rendered}
-		</title>
-	</Head>
-	<body>
-		<Header />
-        <!-- Banner -->
-        <div class="w-full h-96 bg-cover bg-center bg-no-repeat bg-secondary bg-blend-overlay flex justify-center items-center" style={`background-image: url(${post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || 'https://placehold.co/550x300?text=No+Feaured+Image'})`}>
+            {post?.title?.rendered || 'Error'}
+        </title>
+    </Head>
+    <body>
+        <Header />
+        <div class="w-full h-96 bg-cover bg-center bg-no-repeat bg-secondary bg-blend-overlay flex justify-center items-center" style={`background-image: url(${post?._embedded?.["wp:featuredmedia"]?.[0]?.source_url || 'https://placehold.co/550x300?text=No+Feaured+Image'})`}>
             <div class="w-11/12 mx-auto font-bold flex flex-col gap-4 lora italic text-white text-3xl text-center">
-                <h3 class="capitalize">{post.title?.rendered || 'Missing Title'}</h3>
-                <!-- Breadcrumbs -->
+                <h3 class="capitalize">{post?.title?.rendered || 'Missing Title'}</h3>
                 <ol class="flex flex-row gap-2 text-sm font-normal capitalize lora italic w-full justify-center items-center">
                     <li><a href="/" style="color: #d52127;">Home</a></li>
                     <li>/</li>
                     <li><a href="/stories" style="color: #d52127;">Stories</a></li>
                     <li>/</li>
-                    <li>{post.title?.rendered || 'Missing Title'}</li>
+                    <li>{post?.title?.rendered || 'Missing Title'}</li>
                 </ol>
             </div>                    
         </div>
-		<!-- Article Content -->
         <section class="w-11/12 mx-auto grid grid-cols-12 justify-center items-start">
             <div class="col-span-12 md:col-span-9">
-                <!-- Article Data -->
                 <div class="w-11/12 mt-12">
-                    <article set:html={post.content.rendered} class="prose-img:rounded-lg prose-headings:font-bold prose-headings:py-3 prose-p:py-2 prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl prose-h4:text-2xl prose-h5:text-2xl prose-h6:text-xl prose-ol:ms-7 prose-ul:ms-7 prose-ol:list-decimal" />
+                    {post ? <article set:html={post.content.rendered} class="prose-img:rounded-lg prose-headings:font-bold prose-headings:py-3 prose-p:py-2 prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl prose-h4:text-2xl prose-h5:text-2xl prose-h6:text-xl prose-ol:ms-7 prose-ul:ms-7 prose-ol:list-decimal" /> : <p>Error loading post content.</p>}
                     <div class="flex flex-row gap-3 font-bold py-3">
                         Tags: <span class="flex gap-3 font-normal">{tags.map((tag: any) => (
                             <p class="bg-gray-200 px-3 py-1 rounded-md text-sm hover:bg-gray-300">
@@ -90,16 +126,15 @@ function formatDate(dateString: string) {
                     </div>
                     <span class="mt-3 text-gray-500 flex flex-row justify-between items-center">
                         <p>
-                            Published: <time datetime={post.date}>{formatDate(post.date)}</time>
+                            Published: <time datetime={post?.date}>{formatDate(post?.date)}</time>
                         </p>
                         <p>
-                            Author: {post.author?.node?.name || 'Team POCF'}
+                            Author: {post?.author?.node?.name || 'Team POCF'}
                         </p>
                     </span>
                 </div>
                 <br />
                 <div class="w-11/12">
-                    <!-- Random Quote -->
                     {randomQuote.sort(() => 0.5 - Math.random()).slice(0, 1).map((p: any) => <Quotescard post={p}/>)}
                 </div>
             </div>
@@ -107,6 +142,6 @@ function formatDate(dateString: string) {
                 <Sidebar />
             </div>
         </section>
-		<Footer />
+        <Footer />
 	</body>
 </html>
