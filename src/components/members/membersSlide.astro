@@ -5,5 +5,5 @@ const { member } = Astro.props;
 const { name, image} = member.data;
 ---
 <li class="list-none bg-gradient-to-b from-white to-primary rounded-full w-5/6 h-auto [&>img]:w-[150px] [&>img]:h-[auto]">
-   <Image class="rounded-full p-1" src={image} alt={name} />
+   <Image class="rounded-full p-1" src={image} alt={name} loading={"lazy"} />
 </li>

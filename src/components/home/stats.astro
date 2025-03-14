@@ -6,49 +6,56 @@ import { Image } from "astro:assets";
 import smiles from "src/icons/smiles2.svg";
 import girls from "src/icons/girl1.svg";
 ---
-<section class="w-full h-56 bg-blend-overlay bg-secondary/90 bg-cover bg-center flex justify-center items-center py-44" style={`background-image: url(${counterBG.src})`}>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-11/12 mx-auto">
-        <div class="flex flex-row w-full gap-5 justify-center items-center">
-            <div class="flex flex-col mt-3 gap-4">
-                <Icon name="members" class="counters w-12 h-auto -mt-1 text-primary" />
-                <hr class="border-primary"/>
+<section class="w-full relative h-56 md:h-[350px]">
+    <Image src={counterBG}  alt="Counter Background" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+    <div class="absolute inset-0 bg-black/70 flex justify-center items-center py-44">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-11/12 mx-auto relative z-10">
+            {/* POCF Members */}
+            <div class="flex flex-row w-full gap-5 justify-center items-center">
+                <div class="flex flex-col mt-3 gap-4">
+                    <Icon name="members" class="counters w-12 h-auto -mt-1 text-primary" />
+                    <hr class="border-primary"/>
+                </div>
+                <div class="flex flex-col mt-3">
+                    <span class="counter text-primary text-[35px] font-bold">20</span>
+                    <p class="text-white uppercase montserrat text-sm font-bold m-0">POCF Members</p>
+                </div>
             </div>
-            <div class="flex flex-col mt-3">
-                <span class="counter text-primary text-[35px] font-bold">20</span>
-                <p class="text-white uppercase montserrat text-sm font-bold m-0">POCF Members</p>
-            </div>
-        </div>
 
-        <div class="flex flex-row w-full gap-5 justify-center items-center">
-            <div class="flex flex-col mt-3 gap-4">
-                <Icon name="boys" class="counters w-12 h-auto -mt-1 text-primary" />
-                <hr class="border-primary"/>
+            {/* Total Boys */}
+            <div class="flex flex-row w-full gap-5 justify-center items-center">
+                <div class="flex flex-col mt-3 gap-4">
+                    <Icon name="boys" class="counters w-12 h-auto -mt-1 text-primary" />
+                    <hr class="border-primary"/>
+                </div>
+                <div class="flex flex-col mt-3">
+                    <span class="counter text-primary text-[35px] font-bold">53978</span>
+                    <p class="text-white uppercase montserrat text-sm font-bold m-0">Total Boys</p>
+                </div>
             </div>
-            <div class="flex flex-col mt-3">
-                <span class="counter text-primary text-[35px] font-bold">53978</span>
-                <p class="text-white uppercase montserrat text-sm font-bold m-0">Total Boys</p>
-            </div>
-        </div>
 
-        <div class="flex flex-row w-full gap-5 justify-center items-center">
-            <div class="flex flex-col mt-3 gap-4">
-                <Image src={girls} alt={"girl emoji"} class="counters w-12 h-auto -mt-1 text-primary" />
-                <hr class="border-primary"/>
+            {/* Total Girls */}
+            <div class="flex flex-row w-full gap-5 justify-center items-center">
+                <div class="flex flex-col mt-3 gap-4">
+                    <Image src={girls} alt={"girl emoji"} class="counters w-12 h-auto -mt-1 text-primary" />
+                    <hr class="border-primary"/>
+                </div>
+                <div class="flex flex-col mt-3">
+                    <span class="counter text-primary text-[35px] font-bold">47358</span>
+                    <p class="text-white uppercase montserrat text-sm font-bold m-0">Total Girls</p>
+                </div>
             </div>
-            <div class="flex flex-col mt-3">
-                <span class="counter text-primary text-[35px] font-bold">47358</span>
-                <p class="text-white uppercase montserrat text-sm font-bold m-0">Total Girls</p>
-            </div>
-        </div>
 
-        <div class="flex flex-row w-full gap-5 justify-center items-center">
-            <div class="flex flex-col mt-3 gap-4">
-                <Image src={smiles} alt={"smiles emoji"} class="counters w-12 h-auto -mt-1 text-primary" />
-                <hr class="border-primary"/>
-            </div>
-            <div class="flex flex-col mt-3">
-                <span class="counter text-primary text-[35px] font-bold">101336</span>
-                <p class="text-white uppercase montserrat text-sm font-bold m-0">Total Orphans</p>
+            {/* Total Orphans */}
+            <div class="flex flex-row w-full gap-5 justify-center items-center">
+                <div class="flex flex-col mt-3 gap-4">
+                    <Image src={smiles} alt={"smiles emoji"} class="counters w-12 h-auto -mt-1 text-primary" />
+                    <hr class="border-primary"/>
+                </div>
+                <div class="flex flex-col mt-3">
+                    <span class="counter text-primary text-[35px] font-bold">101336</span>
+                    <p class="text-white uppercase montserrat text-sm font-bold m-0">Total Orphans</p>
+                </div>
             </div>
         </div>
     </div>
