@@ -19,11 +19,7 @@ import Filters from '@comps/media/filters.astro'
 
     <div class="p-5 sm:p-8">
         <div class="columns-1 sm:columns-2 sm:gap-4 md:columns-3 lg:columns-4 [&>div:not(:first-child)]:mt-8 space-x-6 space-y-6">
-            {media
-                .sort((a: any, b: any) => Number(b.data.order) - Number(a.data.order))
-                .map((m: any) => ( <Gallery media={m} /> 
-
-            ))}
+            <Gallery />
         </div>
     </div>
 </section>
@@ -33,13 +29,20 @@ import Filters from '@comps/media/filters.astro'
         buttons.forEach(btn => btn.classList.remove('bg-secondary', 'text-white', 'transition', 'duration-300', 'ease-in-out'));
         button.classList.add('bg-secondary', 'text-white', 'transition', 'duration-300', 'ease-in-out');
 
-        const images = document.querySelectorAll('.columns-1 > div');
+        // More specific selector
+        const images = document.querySelectorAll('.columns-1 > div > .grid[data-item]');
         const target = button.getAttribute('data-target');
+        console.log("Clicked filter target:", target);
+
         images.forEach(img => {
+            const item = img.getAttribute('data-item');
+            console.log("Image element:", img); // Log the entire element
+            console.log("Image data-item:", item);
+            console.log("Comparison (item === target):", item === target); // Log the comparison result
             if (target === 'all') {
                 img.classList.remove('hidden', 'transition', 'duration-300', 'ease-in-out');
             } else {
-                if (img.getAttribute('data-item') === target) {
+                if (item === target) {
                     img.classList.remove('hidden', 'transition', 'duration-300', 'ease-in-out');
                 } else {
                     img.classList.add('hidden', 'transition', 'duration-300', 'ease-in-out');
@@ -48,5 +51,10 @@ import Filters from '@comps/media/filters.astro'
         });
     }
 </script>
+<style>
+    button.outline-0.ring-0.focus\:ring-0.focus\:outline-0.capitalize.border.border-primary.rounded-full.py-2.px-5.bg-primary {
+    color: white;
+}
+</style>
 </Layout>
 
