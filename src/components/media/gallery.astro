@@ -2,7 +2,7 @@
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/content/media/*/*.{jpeg,jpg,png,gif}');
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/content/media/*/*.{jpeg,JPG,jpg,png,gif}');
 const imageEntries = Object.entries(images);
 
 // Sort images by year in descending order
