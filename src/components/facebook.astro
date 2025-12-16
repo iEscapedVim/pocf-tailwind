@@ -1,0 +1,19 @@
+---
+import { getFacebookPosts } from "@/lib/facebook";
+
+let posts = [];
+let error = null;
+
+try {
+  const data = await getFacebookPosts(5);
+  posts = data.data ?? [];
+} catch (err:any) {
+  error = err.message;
+}
+---
+
+<h1>Facebook Posts Test</h1>
+
+{error && <pre style="color:red">{error}</pre>}
+
+<pre>{JSON.stringify(posts, null, 2)}</pre>

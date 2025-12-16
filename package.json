@@ -11,22 +11,22 @@
   "dependencies": {
     "@astrojs/mdx": "4.0.7",
     "@astrojs/tailwind": "5.1.5",
-    "@fontsource-variable/lora": "^5.1.0",
-    "@fontsource-variable/montserrat": "^5.1.0",
-    "@fontsource/lato": "^5.1.0",
-    "astro": "^5.6.1",
-    "astro-icon": "^1.1.4",
+    "@fontsource-variable/lora": "^5.2.8",
+    "@fontsource-variable/montserrat": "^5.2.8",
+    "@fontsource/lato": "^5.2.7",
+    "astro": "^5.16.5",
+    "astro-icon": "^1.1.5",
     "counterup2": "^2.0.2",
     "date-fns": "^4.1.0",
-    "dotenv": "^16.4.7",
+    "dotenv": "^16.6.1",
     "flowbite": "^2.5.2",
-    "graphql": "^16.10.0",
-    "graphql-request": "^7.1.2",
+    "graphql": "^16.12.0",
+    "graphql-request": "^7.4.0",
     "sharp": "^0.33.5",
-    "swiper": "^11.1.15",
-    "tailwindcss": "^3.4.17"
+    "swiper": "^12.0.3",
+    "tailwindcss": "^3.4.19"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.15"
+    "@tailwindcss/typography": "^0.5.19"
   }
 }
